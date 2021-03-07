@@ -16,7 +16,6 @@ def traceTree(root):
         return traceTree(root[0])
     else:
         num1 = traceTree(root[0])
-        num2 = traceTree(root[1])
         try:
             num1 = float(num1)
         except ValueError:
@@ -24,14 +23,16 @@ def traceTree(root):
                 num1 = 3.1415
             else:
                 raise IncalculableError
-        try:
-            num2 = float(num2)
-        except ValueError:
-            if num2 == "pi":
-                num2 == 3.1415
-            else:
-                raise IncalculableError
-
+        num2 = None
+        if len(root > 1):
+            num2 = traceTree(root[1])
+            try:
+                num2 = float(num2)
+            except ValueError:
+                if num2 == "pi":
+                    num2 == 3.1415
+                else:
+                    raise IncalculableError
         result = calculation(root.tag, num1, num2)
         return result
 

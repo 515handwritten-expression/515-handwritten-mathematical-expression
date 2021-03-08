@@ -1,28 +1,26 @@
-import xml.etree.ElementTree as ET
+from PIL import Image
+import os
+trainData = []
+trainLabels = []
 
-#load datasets
-ground_truth = [] # start with $, end with $
+for root, dirs, files in os.walk('trainPNGSeg'):
+    for file in files:
+        if (file != ".DS_Store"):
+            img = Image.open(os.path.join(root, file), "r")
+            trainData.append(img)
+            label = '_'.join(file.split('_')[:-1])
+            trainLabels.append(label)
 
-with open('formulaire001-equation030.inkml', 'r') as file:
-    tree = ET.parse(file)
-    root = tree.getroot()
-    for annotation in root.findall('{http://www.w3.org/2003/InkML}annotation'):
-        if (annotation.get('type')) == 'truth':
-            ground_truth.append(annotation.text)
-for i in range(len(ground_truth)):
-    print(ground_truth[i])
-
-
-# training files
-
-
-# partition dataset into training and testing splits
 
 
 # load and compile the LeNet model
+model = model.classfier()
 
+model = model.train(model,trainData,trainLabels)
+# score = model.eval(model,testData,testLabel)
 
 # train the network
+
 
 # save the serialized network weights to disk so it can be reused (optional)
 

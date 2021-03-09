@@ -13,7 +13,9 @@ data_gen = ImageDataGenerator(rescale=1./255, shear_range=0.2, zoom_range=0.2, h
 
 train_dataset = data_gen.flow_from_directory(train_data_dir, target_size=(32, 32), color_mode="grayscale", batch_size= 15, subset='training')
 validation_dataset = data_gen.flow_from_directory(train_data_dir, target_size=(32, 32), color_mode="grayscale", batch_size= 15, subset='validation')
-checkpoint = ModelCheckpoint(train_data_dir, monitor='val_acc', verbose=1, save_best_only=True, mode='max')
+
+# overwrite and save the model with the best val_acc (the accuracy of a batch of testing data)
+checkpoint = ModelCheckpoint(train_data_dir, monitor='val_accuracy', verbose=1, save_best_only=True, mode='max')
 
 # initialize lenet model
 model = Sequential()
@@ -31,7 +33,13 @@ model.add(Dense(units=numClasses, activation = 'softmax'))
 # compile model & fit model with training and validation data
 model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
 print("training...")
-model.fit_generator(train_dataset, steps_per_epoch = train_dataset.samples, validation_data = validation_dataset,  validation_steps = validation_dataset.samples, epochs = 20, callbacks = [checkpoint])
+model.fit_generator(train_dataset, steps_per_epoch = len(train_dataset), validation_data = validation_dataset,  validation_steps = len(validation_dataset), epochs = 15, callbacks = [checkpoint])
 
 #saving model to .h5 file in train_data_dir
+print("saving model...")
 model.save('LeNetModel.h5')
+
+print("evaluating...")
+score = model.evaluate(validation_dataset)
+print('Test Loss:', score[0])
+print('Test accuracy:', score[1])

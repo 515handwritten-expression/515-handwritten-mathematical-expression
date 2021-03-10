@@ -1,5 +1,17 @@
-import xml.etree.ElementTree as ET
 import math
+import os.path
+from os import path
+
+def calculateXml(xml_tree):
+    try:
+        result = traceTree(xml_tree.getroot())
+    except IncalculableError:
+        result = "Unable to calculate"
+    if path.exists("calculationResult.txt"):
+        os.remove("calculationResult.txt")
+    f = open("calculationResult.txt", "w")
+    f.write(str(result))
+    f.close()
 
 # return the calculated result from the parsed xml tree
 # If the tree contains letters, return an IncalculableError

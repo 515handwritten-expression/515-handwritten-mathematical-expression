@@ -1,56 +1,62 @@
 import unittest
 import math
 import xml.etree.ElementTree as ET
-from XmlTreeCalculation import IncalculableError
-import XmlTreeCalculation as XTC
-
+from scr.XmlTreeCalculation import IncalculableError
+import scr.XmlTreeCalculation as XTC
+import os.path
 
 class TestCalculation(unittest.TestCase):
+    def testCalculateXml(self):
+        XTC.calculateXml(ET.parse("../data/xml/expression.xml"))
+        self.assertTrue(os.path.exists("CalculationResult.txt"))
+        XTC.calculateXml(ET.parse("../data/xml/expressionFull.xml"))
+        self.assertTrue(os.path.exists("CalculationResult.txt"))
+
     def testTraceTreeCalculation(self):
         expression_result = round((12*(7-(3**2)))/6+8,10)
-        self.assertEqual(XTC.traceTree(ET.parse("expression.xml").getroot()), expression_result)
+        self.assertEqual(XTC.traceTree(ET.parse("../data/xml/expression.xml").getroot()), expression_result)
         expressionFull_result = round((math.e*(3.1415-(3**2)))/(-6)+8,10)
-        self.assertEqual(XTC.traceTree(ET.parse("expressionFull.xml").getroot()), expressionFull_result)
+        self.assertEqual(XTC.traceTree(ET.parse("../data/xml/expressionFull.xml").getroot()), expressionFull_result)
 
     def testTraceTreeSpecialConstant(self):
         constantE_Result = 1
         constantETimes_Result = round(2 * math.e,10)
         constantPi_Result = 1
         constantPiTimes_Result = round(2 * 3.1415,10)
-        self.assertEqual(XTC.traceTree(ET.parse("constantE.xml").getroot()), constantE_Result)
-        self.assertEqual(XTC.traceTree(ET.parse("constantETimes.xml").getroot()), constantETimes_Result)
-        self.assertEqual(XTC.traceTree(ET.parse("constantPi.xml").getroot()), constantPi_Result)
-        self.assertEqual(XTC.traceTree(ET.parse("constantPiTimes.xml").getroot()), constantPiTimes_Result)
+        self.assertEqual(XTC.traceTree(ET.parse("../data/xml/constantE.xml").getroot()), constantE_Result)
+        self.assertEqual(XTC.traceTree(ET.parse("../data/xml/constantETimes.xml").getroot()), constantETimes_Result)
+        self.assertEqual(XTC.traceTree(ET.parse("../data/xml/constantPi.xml").getroot()), constantPi_Result)
+        self.assertEqual(XTC.traceTree(ET.parse("../data/xml/constantPiTimes.xml").getroot()), constantPiTimes_Result)
 
     def testTraceTreePositiveNegativeSign(self):
-        self.assertEqual(XTC.traceTree(ET.parse("negativeNumber.xml").getroot()), -8)
-        self.assertEqual(XTC.traceTree(ET.parse("positiveNumber.xml").getroot()), 8)
+        self.assertEqual(XTC.traceTree(ET.parse("../data/xml/negativeNumber.xml").getroot()), -8)
+        self.assertEqual(XTC.traceTree(ET.parse("../data/xml/positiveNumber.xml").getroot()), 8)
 
 
     def testTraceTreeErrorLetters(self):
-        self.assertRaises(IncalculableError, XTC.traceTree, ET.parse("errorLetter.xml").getroot())
-        self.assertRaises(IncalculableError, XTC.traceTree, ET.parse("errorLetterAlpha.xml").getroot())
+        self.assertRaises(IncalculableError, XTC.traceTree, ET.parse("../data/xml/errorLetter.xml").getroot())
+        self.assertRaises(IncalculableError, XTC.traceTree, ET.parse("../data/xml/errorLetterAlpha.xml").getroot())
 
     def testTraceTreeErrorOperation(self):
-        self.assertRaises(IncalculableError, XTC.traceTree, ET.parse("errorOperationPm.xml").getroot())
-        self.assertRaises(IncalculableError, XTC.traceTree, ET.parse("errorOperationGeq.xml").getroot())
-        self.assertRaises(IncalculableError, XTC.traceTree, ET.parse("errorOperationGt.xml").getroot())
-        self.assertRaises(IncalculableError, XTC.traceTree, ET.parse("errorOperationLeq.xml").getroot())
-        self.assertRaises(IncalculableError, XTC.traceTree, ET.parse("errorOperationLt.xml").getroot())
-        self.assertRaises(IncalculableError, XTC.traceTree, ET.parse("errorOperationNeq.xml").getroot())
+        self.assertRaises(IncalculableError, XTC.traceTree, ET.parse("../data/xml/errorOperationPm.xml").getroot())
+        self.assertRaises(IncalculableError, XTC.traceTree, ET.parse("../data/xml/errorOperationGeq.xml").getroot())
+        self.assertRaises(IncalculableError, XTC.traceTree, ET.parse("../data/xml/errorOperationGt.xml").getroot())
+        self.assertRaises(IncalculableError, XTC.traceTree, ET.parse("../data/xml/errorOperationLeq.xml").getroot())
+        self.assertRaises(IncalculableError, XTC.traceTree, ET.parse("../data/xml/errorOperationLt.xml").getroot())
+        self.assertRaises(IncalculableError, XTC.traceTree, ET.parse("../data/xml/errorOperationNeq.xml").getroot())
 
     def testTraceTreeRaiseExceptionMissingChild(self):
-        self.assertRaises(IncalculableError, XTC.traceTree, ET.parse("missingOneChild.xml").getroot())
-        self.assertRaises(IncalculableError, XTC.traceTree, ET.parse("missingOneChildPlus.xml").getroot())
-        self.assertRaises(IncalculableError, XTC.traceTree, ET.parse("missingTwoChild.xml").getroot())
+        self.assertRaises(IncalculableError, XTC.traceTree, ET.parse("../data/xml/missingOneChild.xml").getroot())
+        self.assertRaises(IncalculableError, XTC.traceTree, ET.parse("../data/xml/missingOneChildPlus.xml").getroot())
+        self.assertRaises(IncalculableError, XTC.traceTree, ET.parse("../data/xml/missingTwoChild.xml").getroot())
 
     def testTraceTreeRaiseExceptionMissingValue(self):
-        self.assertRaises(IncalculableError, XTC.traceTree, ET.parse("missingLeftValueDiv.xml").getroot())
-        self.assertRaises(IncalculableError, XTC.traceTree, ET.parse("missingLeftValueTimes.xml").getroot())
-        self.assertRaises(IncalculableError, XTC.traceTree, ET.parse("missingRightValueDiv.xml").getroot())
-        self.assertRaises(IncalculableError, XTC.traceTree, ET.parse("missingRightValueMinus.xml").getroot())
-        self.assertRaises(IncalculableError, XTC.traceTree, ET.parse("missingRightValuePlus.xml").getroot())
-        self.assertRaises(IncalculableError, XTC.traceTree, ET.parse("missingRightValueTimes.xml").getroot())
+        self.assertRaises(IncalculableError, XTC.traceTree, ET.parse("../data/xml/missingLeftValueDiv.xml").getroot())
+        self.assertRaises(IncalculableError, XTC.traceTree, ET.parse("../data/xml/missingLeftValueTimes.xml").getroot())
+        self.assertRaises(IncalculableError, XTC.traceTree, ET.parse("../data/xml/missingRightValueDiv.xml").getroot())
+        self.assertRaises(IncalculableError, XTC.traceTree, ET.parse("../data/xml/missingRightValueMinus.xml").getroot())
+        self.assertRaises(IncalculableError, XTC.traceTree, ET.parse("../data/xml/missingRightValuePlus.xml").getroot())
+        self.assertRaises(IncalculableError, XTC.traceTree, ET.parse("../data/xml/missingRightValueTimes.xml").getroot())
 
     def testCalculationPlus(self):
         self.assertEqual(XTC.calculation("plus",1,2),3)

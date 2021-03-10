@@ -1,1 +1,1 @@
-# hand-writting mathematical expression recognization system
+# hand-written mathematical expression recognization system

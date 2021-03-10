@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Handwritten Mathematical Expressions</title>
+<style></style>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+</head>
+<body>
+
+<h1>Handwritten Mathematical Expressions </a> </h1>
+
+
+<hr>
+<br>
+<p><strong></strong>Please upload the image you would like to calculate below</p>
+
+
+<!--script>
+    $(document).ready(function(){
+        $("#myInput").change(function(){
+            alert("A file has been selected.");
+        });
+    });
+    if ($("#myInput").get(0).files.length === 0) {
+    console.log("No files selected.");
+  }
+
+ function unlock(){
+    document.getElementById('myInput').removeAttribute("disabled");
+}
+
+
+</script-->
+
+<script>
+function unlock(){
+    document.getElementById('buttonSubmit').removeAttribute("disabled");
+}
+</script>
+
+<!--form action = "http://127.0.0.1:5000/uploader" method = "POST" 
+ enctype = "multipart/form-data">
+  <input type='file' id="myInput" name = 'file' onchange="readURL(this);"/>
+ <input type = "submit"/-->
+
+<form action="http://127.0.0.1:5000/uploader" method="post" enctype="multipart/form-data">
+<input type="file" onchange="unlock();" name="file">
+<button type="submit" id="buttonSubmit" value="upload" disabled>Upload</button>
+</form> 
+
+<br>
+
+<!--p>Here is the converted version of the mathematical expression you submitted:</p>
+<img src="expression.jpg" alt="Converted LaTex">
+
+
+<br>
+<p>The calculated result is:</p><input type="number" id="myNumber" placeholder="Result"-->
+
+<div id="result"></div>
+
+<script>
+  $.on('ready', function() {
+    $('#result').load('/result')
+  })
+</script>
+
+<br>
+<hr>
+<p>Developed by Summer Ai, Runting Shao, Ningji Shen, Chang Xu and Zihui Zhang at the University of Washington.</p>
+<p>All Rights Reserved.</p>
+
+
+
+</body>
+</html>

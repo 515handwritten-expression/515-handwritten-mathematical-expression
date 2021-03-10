@@ -1,1 +1,1 @@
-# 515-handwritting-character
+# hand-written mathematical expression recognization system

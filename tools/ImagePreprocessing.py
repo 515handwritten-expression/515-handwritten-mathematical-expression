@@ -24,7 +24,7 @@ def imgConvert(original_img):
     if(height*width*1000)> 2^31:
         resize = img_copy
     elif(height * width > 2^31):
-        resize = cv2.resize(img_copy, dsize =(0.01, int(0.01*height/width)), interpolation = cv2.INTER_AREA)
+        resize = cv2.resize(img_copy, dsize =(0.0001, int(0.01*height/width)), interpolation = cv2.INTER_AREA)
     else:
         resize = cv2.resize(img_copy, dsize =(1000, int(1000*height/width)), interpolation = cv2.INTER_AREA)
     #GaussianBlur
@@ -195,7 +195,7 @@ def imgSegmentation(imgs,Position):
             standard_background[difference:img_resize.shape[0] + difference, 0:STANDARD_SIZE] = img_resize
         standard_img = cv2.bitwise_not(standard_background)
         #Skeletonize the image 
-        standard_img = imgSkeleton(standard_img)
+        #standard_img = imgSkeleton(standard_img)
         character_list.append(standard_img)
         standard_imgs=[]
         #Store the location and segment images in a list 
@@ -305,10 +305,10 @@ def trainImageSegementation(inkmlfilepath):
                 cv2.imwrite(imgpath, imgs[i]['segment_img'])
 
 
-#filepath = 'data/trainData/*.inkml' 
-#trainImageSegementation(filepath)
-filepath = 'data/testData/*.png' 
-testImageSegementation(filepath)
+filepath = 'data/trainData/*.inkml' 
+trainImageSegementation(filepath)
+#filepath = 'data/testData/*.png' 
+#testImageSegementation(filepath)
 
 # %
 

@@ -42,7 +42,6 @@ def imgConvert(original_img):
 
 #Get croppped images and skeletonize
 def imgSkeleton(original_img):
-    original_img = cv2.cvtColor(original_img, cv2.COLOR_BGR2GRAY)
     ret,binary_img = cv2.threshold(original_img,0,1,cv2.THRESH_BINARY_INV | cv2.THRESH_OTSU)
     extracted_img = skeletonize(binary_img)
     skeleton = extracted_img.astype(np.uint8) * 255
@@ -195,7 +194,7 @@ def imgSegmentation(imgs,Position):
             standard_background[difference:img_resize.shape[0] + difference, 0:STANDARD_SIZE] = img_resize
         standard_img = cv2.bitwise_not(standard_background)
         #Skeletonize the image 
-        #standard_img = imgSkeleton(standard_img)
+        standard_img = imgSkeleton(standard_img)
         character_list.append(standard_img)
         standard_imgs=[]
         #Store the location and segment images in a list 
@@ -305,10 +304,10 @@ def trainImageSegementation(inkmlfilepath):
                 cv2.imwrite(imgpath, imgs[i]['segment_img'])
 
 
-filepath = 'data/trainData/*.inkml' 
-trainImageSegementation(filepath)
-#filepath = 'data/testData/*.png' 
-#testImageSegementation(filepath)
+#filepath = 'data/trainData/*.inkml' 
+#trainImageSegementation(filepath)
+filepath = 'data/predPNG/*.png' 
+testImageSegementation(filepath)
 
 # %
 

@@ -5,18 +5,17 @@ from cv2 import cv2
 import numpy as np
 import glob
 import os
+import shutil
 import pickle
 from skimage.morphology import skeletonize
 STANDARD_SIZE = 32
 symbol = ['alpha','beta','gamma','phi','pi','geq','leq','pm','theta','infty','div','times','sum','ldots','neq','rightarrow','int','sqrt', 'exists','forall','in']
 
 #Read image from file 
-def imgReadIn(imgfilename):
-    original_img = cv2.imread(imgfilename)
-    return original_img
-
 #Convert original image before image segmentation 
-def imgConvert(original_img):
+def imgReadAndConvert(imgfilename):
+    original_img = cv2.imread(imgfilename)   
+    # inspect error object
     img_copy = original_img.copy()
     height = img_copy.shape[0]
     width = img_copy.shape[1]
@@ -47,47 +46,33 @@ def imgSkeleton(original_img):
     skeleton = extracted_img.astype(np.uint8) * 255
     skeleton = cv2.bitwise_not(skeleton)
     return skeleton
-
-#Get vertical projection of the original image
-def getVerticalProjection(img):
+ 
+def getVerticalProjectionSegmentationPoints(img):
     height, width = img.shape[:2]
-    vertical = np.zeros(width,dtype=np.int32)
+    W = np.zeros(width,dtype=np.int32)
     for x in range(0, width):    
         for y in range(0, height):
             if img[y,x] == 0:
-                vertical[x] += 1
-    return vertical
-   # emptyImage = np.zeros((height, width, 3), np.uint8) 
-   # for x in range(0,width):
-   #     for y in range(0, vertical[x]):
-   #         b = (255,255,255)
-   #         emptyImage[y,x] = b
-   # cv2.imwrite('data/testPN1/v1.png', emptyImage)
+                W[x] += 1
+    start = 0
+    W_Start = []
+    W_End = []
+    for j in range(len(W)):
+        if W[j] > 0 and start ==0:
+            W_Start.append(j)
+            start = 1
+        if W[j] <= 0 and start == 1:
+            W_End.append(j)
+            start = 0
+    return W_Start, W_End
 
-#Get horizontal projection of the original image
-def getHorizontalProjection(img):
+def getHorizontalProjectionSegmentationPoints(img):
     height, width = img.shape[:2]
-    horizontal = np.zeros(height,dtype=np.int32)
+    H = np.zeros(height,dtype=np.int32)
     for y in range(0, height):    
         for x in range(0, width):
             if img[y,x] == 0:
-                horizontal[y] += 1
-    return horizontal
-   # emptyImage = np.zeros((height, width, 3), np.uint8) 
-   # for y in range(0,height):
-   #     for x in range(0, horizontal[y]):
-   #         b = (255,255,255)
-   #         emptyImage[y,x] = b
-   # cv2.imwrite('data/testPN1/h1.png', emptyImage)
-
-#Crop the original image along with the horizontal direction 
-#For each cropped images, crop the image along with the vertical direction 
-#Return the final segmenting position 
-def horizontalProjectionSegmentation(img):
-    h,w =img.shape[:2]
-    H = getHorizontalProjection(img)
-    Position = []
-    imgs = []
+                H[y] += 1
     start = 0
     H_Start = []
     H_End = []
@@ -98,78 +83,38 @@ def horizontalProjectionSegmentation(img):
         if H[i] <= 0 and start == 1:
             H_End.append(i)
             start = 0
+    return H_Start, H_End
+
+#Crop the original image along with the horizontal direction 
+#For each cropped images, crop the image along with the vertical direction 
+#Return the final segmenting position 
+def projectionSegmentation(img):
+    h,w =img.shape[:2]
+    Position = []
+    imgs = []
+    H_Start, H_End = getHorizontalProjectionSegmentationPoints(img)
     #For each cropped images, crop the image along with the vertical direction
     for j in range(len(H_Start)):
         cropImg = img[H_Start[j]:H_End[j], 0:w]
-        W_Start, W_End = verticalProjectionSegmentation(cropImg)
+        W_Start, W_End = getVerticalProjectionSegmentationPoints(cropImg)
         for x in range(len(W_Start)):
             Position.append([W_Start[x],H_Start[j],W_End[x],H_End[j]])
             img_aftercrop = img[H_Start[j]:H_End[j], W_Start[x]:W_End[x]]
             imgs.append(img_aftercrop)
     return imgs, Position
 
-#Crop the given image along with the vertical direction 
-#Return the start and end points of cropping 
-def verticalProjectionSegmentation(cropImg):
-        W = getVerticalProjection(cropImg)
-        start = 0
-        W_Start = []
-        W_End = []
-        for j in range(len(W)):
-            if W[j] > 0 and start ==0:
-                W_Start.append(j)
-                start = 1
-            if W[j] <= 0 and start == 1:
-                W_End.append(j)
-                start = 0
-        '''interval = []
-        sum_interval = 0
-        for x in range(len(W_End)-1):
-            interval.append(W_Start[x+1]-W_End[x])
-            sum_interval += W_Start[x+1]-W_End[x]
-        average_interval = sum_interval/len(W_End)
-        poppeditem = 0
-        print(average_interval)
-        for i in range(len(interval)):
-            if(interval[i] < average_interval/4):
-                W_Start.pop(i - poppeditem +1)
-                W_End.pop(i - poppeditem)
-                poppeditem += 1'''
-        return W_Start, W_End
 
 #After projection segmentation, for each cropped image, 
 #cropped off the white space and only keep the character
 #Resize and skeletonize the cropped images and store th images 
 #and positions into a list of dictionaries
-def imgSegmentation(imgs,Position):
+def imgStandardize(imgs,Position):
     character_list = []
     for img in imgs:
         #Crop horizontally
-        H = getHorizontalProjection(img)
-        start1 = 0
-        H_Start = []
-        H_End = []
-        for i in range(len(H)):
-            if H[i] > 0 and start1 == 0:
-                H_Start.append(i)
-                start1 = 1
-            if H[i] <= 0 and start1 == 1:
-                H_End.append(i)
-                start1 = 0
-        if(len(H_End)<len(H_Start)):
-            H_End.append(img.shape[0])
+        H_Start, H_End = getHorizontalProjectionSegmentationPoints(img)
         #Crop vertically
-        W = getVerticalProjection(img)
-        start2 = 0
-        W_Start = []
-        W_End = []
-        for j in range(len(W)):
-            if W[j] > 0 and start2 == 0:
-                W_Start.append(j)
-                start2 = 1
-            if W[j] <= 0 and start2 == 1:
-                W_End.append(j)
-                start2 = 0
+        W_Start, W_End = getVerticalProjectionSegmentationPoints(img)
         #If projection values are not zero at the very end, 
         # set w or h as the end point of croping 
         if(len(W_End)<len(W_Start)):
@@ -214,18 +159,19 @@ def testImageSegementation(filepath):
             num += 1
             print(fileid + ':successfully loaded'  + '-' + str(num))
             #Read in original image 
-            oriimg = imgReadIn(filename)
             #Convert image 
-            binimg = imgConvert(oriimg)
-            cropimgs, Position = horizontalProjectionSegmentation(binimg)
-            imgs = imgSegmentation(cropimgs,Position)
+            binimg = imgReadAndConvert(filename)
+            cropimgs, Position = projectionSegmentation(binimg)
+            imgs = imgStandardize(cropimgs,Position)
             img_list = []
             img_loc = []
             for i in range(len(imgs)):
                 img_list.append(imgs[i]['segment_img'])
                 img_loc.append(imgs[i]['location'])
             path = os.path.join('data/testPNGSeg', fileid)
-            os.mkdir(path)
+            if(os.path.exists(path)):
+                shutil.rmtree(path)
+            os.mkdir(path) 
             for index, img in enumerate(img_list, start=1):
                 imgpath = path + '/' + str(index) + '.png'
                 cv2.imwrite(imgpath, img)
@@ -288,10 +234,9 @@ def trainImageSegementation(inkmlfilepath):
             continue
         print(fileid + ':successfully loaded'  + '-' + str(num))
         ground_truth = readCharacterListFromInkmlFile(inkmlfilename)
-        oriimg = imgReadIn(pngfilename)
-        binimg = imgConvert(oriimg)
-        cropimgs, Position = horizontalProjectionSegmentation(binimg)
-        imgs = imgSegmentation(cropimgs,Position)
+        binimg = imgReadAndConvert(pngfilename)
+        cropimgs, Position = projectionSegmentation(binimg)
+        imgs = imgStandardize(cropimgs,Position)
         if(len(imgs) == len(ground_truth)):
             for i in range(len(imgs)):
                 path = os.path.join('data/trainPNGSeg', ground_truth[i])
@@ -306,9 +251,8 @@ def trainImageSegementation(inkmlfilepath):
 
 #filepath = 'data/trainData/*.inkml' 
 #trainImageSegementation(filepath)
-filepath = 'data/predPNG/*.png' 
+filepath = 'data/testDataPNG/*.png' 
 testImageSegementation(filepath)
-
 # %
 
 # %

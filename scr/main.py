@@ -3,6 +3,7 @@ from keras.preprocessing.image import load_img, img_to_array
 import numpy as np
 from os.path import isfile
 
+# input the path of a single image, output a single label
 def predict(input_img_path)
     # loading saved model
     model = load_model('LeNetModel.h5')

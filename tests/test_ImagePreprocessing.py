@@ -1,5 +1,5 @@
 import unittest
-import scr.ImagePreprocessing as ip
+import handwritten_math_expression.ImagePreprocessing as ip
 from cv2 import cv2
 import os
 

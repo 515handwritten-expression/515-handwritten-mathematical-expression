@@ -49,14 +49,16 @@ def infixToPostfix(expression):
 
 
 def expressionTree(expression):
-    expression = expression.replace("pi","3.1415")
-    expression = expression.replace("e","2.718")
+    expression = expression.replace("pi","3.1416")
+    expression = expression.replace("e","2.7183")
     invalid = string.ascii_letters + '='
     for char in expression:
         if char in invalid:
             raise IncalculableError
             break
     expression = re.findall(r"([0-9.]+|\d|[-+()/*^])", expression)
+    if len(expression) == 1:
+        return round(float(expression[0]), 4)
     postfix = infixToPostfix(expression)
     stack = []
     for node in postfix:
@@ -79,7 +81,10 @@ def expressionTree(expression):
             elif node.value == '^':
                 stack.append(math.pow(leftVal, rightVal))
             else:
-                stack.append(leftVal / rightVal)
+                try:
+                    stack.append(leftVal / rightVal)
+                except:
+                    raise IncalculableError
         else:
             stack.append(node.value)
     else:
@@ -95,10 +100,10 @@ def expressionTree(expression):
             stack.append(node)
         else:
             stack.append(node)
-    calc_result = round(calc_result, 3)
+    calc_result = round(calc_result, 4)
     return calc_result
 
-class UnableToCalculableError(Exception):
+class IncalculableError(Exception):
     def __init__(self):
         print("Unable to calculate")
 

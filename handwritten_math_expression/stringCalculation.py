@@ -51,7 +51,12 @@ def infixToPostfix(expression):
 def expressionTree(expression):
     expression = expression.replace("pi","3.1415")
     expression = expression.replace("e","2.718")
-    expression = re.findall(r"([A-Z]+|[0-9.]+|\d|[-+()/*^])", expression)
+    invalid = string.ascii_letters + '='
+    for char in expression:
+        if char in invalid:
+            raise IncalculableError
+            break
+    expression = re.findall(r"([0-9.]+|\d|[-+()/*^])", expression)
     postfix = infixToPostfix(expression)
     stack = []
     for node in postfix:
@@ -60,10 +65,10 @@ def expressionTree(expression):
                 rightVal = float(stack.pop())
                 leftVal = float(stack.pop())
             except ValueError:
-                print("\nCannot calculate result. Expression has non integer operands.")
+                raise IncalculableError
                 break
             except IndexError:
-                print("\nInvalid Expression. Exiting...")
+                raise IncalculableError
                 exit()
             if node.value == '+':
                 stack.append(leftVal + rightVal)
@@ -90,8 +95,12 @@ def expressionTree(expression):
             stack.append(node)
         else:
             stack.append(node)
-    calc_result = round(calc_result, 4)
+    calc_result = round(calc_result, 3)
     return calc_result
+
+class UnableToCalculableError(Exception):
+    def __init__(self):
+        print("Unable to calculate")
 
 def writeCalResult(expression):
     try:

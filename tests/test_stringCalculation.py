@@ -4,12 +4,14 @@ from handwritten_math_expression.stringCalculation import IncalculableError
 import os.path, math
 
 class TestCalculation(unittest.TestCase):
+    """
     def testCalculateXml(self):
         XTC.writeCalResult("1+1")
         self.assertTrue(os.path.exists("CalculationResult.txt"))
         XTC.writeCalResult("1")
         self.assertTrue(os.path.exists("CalculationResult.txt"))
 
+    """
     def testSpecialConstant(self):
         self.assertEqual(XTC.expressionTree("pi"),3.1416)
         self.assertEqual(XTC.expressionTree("e"),2.7183)

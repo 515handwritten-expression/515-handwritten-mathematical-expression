@@ -49,24 +49,19 @@ def write_labels_for_all_segs(filepath):
   model = load_model('LeNetModel_v3.h5')
   label_map = 'label_map_v3.npy'
   label = []
+  positions = []
 
   for root,dir,files in os.walk(filepath):
     for file in sorted(files):
       if file.endswith('png'):
         single_label = predict_single_label(os.path.join(root, file),model,label_map)
-        # single_label[0] is the value, [1] is the tag (numeric or operator)
-        if single_label[0] in numeric:
-          single_label.append("numeric")
-        else:
-          single_label.append("operator")
-        label.append(single_label)
+        label += single_label
       elif file.endswith('pkl'):
         print("pkl:",file)
         with open(os.path.join(root, file), 'rb') as f:
           positions = pickle.load(f)
       else:
         raise ModelInputError
-
   return label,positions
 
 

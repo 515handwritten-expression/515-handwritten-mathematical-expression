@@ -3,7 +3,16 @@ import os, string, pickle
 from os.path import isfile
 from keras.models import load_model
 from keras.preprocessing.image import load_img, img_to_array
+import ImagePreprocessing as ip
+
 numeric = string.digits + "e" + "pi"
+inputpath = './data/testimg/testinkml_1.png'
+savepath = './data/testimg'
+
+#input image segmenatation and resize
+def inputImageSegmentation(filepath,savepath):
+    ip.predictImageSegementation(inputpath,savepath)
+
 # input the path of a single image, output a single label
 def predict_single_label(input_img_path,model,label_map):
 

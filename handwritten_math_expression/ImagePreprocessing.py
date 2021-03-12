@@ -1,4 +1,3 @@
-#%
 import plotly.express as px
 import xml.etree.ElementTree as ET
 from cv2 import cv2
@@ -110,21 +109,29 @@ def projectionSegmentation(img):
 #and positions into a list of dictionaries
 def imgStandardize(imgs,Position):
     character_list = []
-    for img in imgs:
+    loc = []
+    for i in range(len(imgs)):
         #Crop horizontally
-        H_Start, H_End = getHorizontalProjectionSegmentationPoints(img)
+        H_Start, H_End = getHorizontalProjectionSegmentationPoints(imgs[i])
         #Crop vertically
-        W_Start, W_End = getVerticalProjectionSegmentationPoints(img)
+        W_Start, W_End = getVerticalProjectionSegmentationPoints(imgs[i])
         #If projection values are not zero at the very end, 
         # set w or h as the end point of croping 
         if(len(W_End)<len(W_Start)):
-            W_End.append(img.shape[1])
+            W_End.append(imgs[i].shape[1])
         if(len(W_End) == 0):
-            W_End.append(img.shape[1])
+            W_End.append(imgs[i].shape[1])
+        if(len(H_End)<len(H_Start)):
+            H_End.append(imgs[i].shape[0])
         if(len(H_End) == 0):
-            H_End.append(img.shape[0])
-        char_img = img[H_Start[0]:H_End[-1],W_Start[0]:W_End[-1]]
+            H_End.append(imgs[i].shape[0])
+        char_img = imgs[i][H_Start[0]:H_End[-1],W_Start[0]:W_End[-1]]
         h, w = char_img.shape[:2]
+        W1 = Position[i][0]
+        H1 = Position[i][1]
+        W2 = Position[i][2]
+        H2 = Position[i][3]
+        loc.append([W1+W_Start[0],H1+H_Start[0],W2-(imgs[i].shape[1]-W_End[-1]),H2-(imgs[i].shape[0]-H_End[-1])])
         #Resize the image to the standard size of 32 * 32 
         standard_background = np.zeros((STANDARD_SIZE,STANDARD_SIZE),np.uint8)
         if(h > w):
@@ -143,10 +150,10 @@ def imgStandardize(imgs,Position):
         character_list.append(standard_img)
         standard_imgs=[]
         #Store the location and segment images in a list 
-        for i in range(len(character_list)):
-            standard_imgs.append({'location':Position[i],'segment_img':character_list[i]})
-            #Sort the images along with the horizontal direction 
-            standard_imgs.sort(key=lambda x:x['location'][0]) 
+    for i in range(len(character_list)):
+        standard_imgs.append({'location':loc[i],'segment_img':character_list[i]})
+        #Sort the images along with the horizontal direction 
+        standard_imgs.sort(key=lambda x:x['location'][0]) 
     return standard_imgs
 
 #Segment test images 
@@ -173,7 +180,11 @@ def testImageSegementation(filepath):
                 shutil.rmtree(path)
             os.mkdir(path) 
             for index, img in enumerate(img_list, start=1):
-                imgpath = path + '/' + str(index) + '.png'
+                if index < 10:
+                    strindex = '0' + str(index)
+                else:
+                    strindex = str(index)
+                imgpath = path + '/' + strindex + '.png'
                 cv2.imwrite(imgpath, img)
             #Store the position as a pickle file 
             picklepath = path + '/' + fileid + '.pkl'
@@ -248,11 +259,38 @@ def trainImageSegementation(inkmlfilepath):
                     imgpath = path + '/' + ground_truth[i] + '_1.png'
                 cv2.imwrite(imgpath, imgs[i]['segment_img'])
 
+def predictImageSegementation(filename,savepath):
+    #13 need to be changed
+    fileid = filename[13:-4]
+    #Read in original image 
+    #Convert image 
+    binimg = imgReadAndConvert(filename)
+    cropimgs, Position = projectionSegmentation(binimg)
+    imgs = imgStandardize(cropimgs,Position)
+    img_list = []
+    img_loc = []
+    for i in range(len(imgs)):
+        img_list.append(imgs[i]['segment_img'])
+        img_loc.append(imgs[i]['location'])
+    path = os.path.join(savepath, fileid)
+    if(os.path.exists(path)):
+        shutil.rmtree(path)
+    os.mkdir(path) 
+    for index, img in enumerate(img_list, start=1):
+        if index < 10:
+            strindex = '0' + str(index)
+        else:
+            strindex = str(index)
+        imgpath = path + '/' + strindex + '.png'
+        cv2.imwrite(imgpath, img)
+    #Store the position as a pickle file 
+    picklepath = path + '/' + fileid + '.pkl'
+    with open(picklepath,"wb") as f_dump:
+        pickle.dump(img_loc, f_dump)
+    f_dump.close()
 
 #filepath = 'data/trainData/*.inkml' 
 #trainImageSegementation(filepath)
-filepath = 'data/testDataPNG/*.png' 
+filepath = 'data/predPNG/*.png' 
 testImageSegementation(filepath)
-# %
-
 # %

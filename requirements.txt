@@ -39,6 +39,7 @@ scikit-image
 scipy
 six
 tifffile
+tensorflow
 toml
 tornado
 traitlets

@@ -6,7 +6,7 @@ appdirs==1.4.4
 argon2-cffi==20.1.0
 asgiref==3.3.1
 astor==0.8.1
-astropy==4.2
+astropy==4.1
 astunparse==1.6.3
 async-generator==1.10
 atari-py==0.2.6
@@ -66,7 +66,6 @@ earthengine-api==0.1.254
 easydict==1.9
 ecos==2.0.7.post1
 editdistance==0.5.3
-en-core-web-sm==2.2.5
 entrypoints==0.3
 ephem==3.7.7.1
 et-xmlfile==1.0.1

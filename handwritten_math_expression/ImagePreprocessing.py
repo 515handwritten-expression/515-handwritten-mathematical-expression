@@ -259,35 +259,6 @@ def trainImageSegementation(inkmlfilepath):
                     imgpath = path + '/' + ground_truth[i] + '_1.png'
                 cv2.imwrite(imgpath, imgs[i]['segment_img'])
 
-def predictImageSegementation(filename,savepath):
-    #13 need to be changed
-    fileid = filename[13:-4]
-    #Read in original image 
-    #Convert image 
-    binimg = imgReadAndConvert(filename)
-    cropimgs, Position = projectionSegmentation(binimg)
-    imgs = imgStandardize(cropimgs,Position)
-    img_list = []
-    img_loc = []
-    for i in range(len(imgs)):
-        img_list.append(imgs[i]['segment_img'])
-        img_loc.append(imgs[i]['location'])
-    path = os.path.join(savepath, fileid)
-    if(os.path.exists(path)):
-        shutil.rmtree(path)
-    os.mkdir(path) 
-    for index, img in enumerate(img_list, start=1):
-        if index < 10:
-            strindex = '0' + str(index)
-        else:
-            strindex = str(index)
-        imgpath = path + '/' + strindex + '.png'
-        cv2.imwrite(imgpath, img)
-    #Store the position as a pickle file 
-    picklepath = path + '/' + fileid + '.pkl'
-    with open(picklepath,"wb") as f_dump:
-        pickle.dump(img_loc, f_dump)
-    f_dump.close()
 
 #filepath = 'data/trainData/*.inkml' 
 #trainImageSegementation(filepath)

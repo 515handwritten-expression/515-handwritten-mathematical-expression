@@ -1,12 +1,11 @@
 import numpy as np
-import os, string, pickle
+import os, string, pickle, shutil
 from os.path import isfile
-import shutil
 from cv2 import cv2
-from keras.models import load_model
-from keras.preprocessing.image import load_img, img_to_array
 import ImagePreprocessing as ip
 import stringCalculation, stringMathJaxConverter, generateStrForLatexAndTree
+from keras.models import load_model
+from keras.preprocessing.image import load_img, img_to_array
 
 #read in input image and do segmantation and resize
 def predictImageSegementation(filename,savepath):

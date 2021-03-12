@@ -6,6 +6,8 @@ from flask import Flask, render_template, request, redirect, url_for, current_ap
 from werkzeug.utils import secure_filename
 import jinja2
 import sys
+import myscript as ms
+# import myscript
 
 # ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 app = Flask(__name__)
@@ -31,6 +33,8 @@ def upload_file():
       f.save(os.path.join(app.config['UPLOAD_FOLDER'],secure_filename(f.filename)))
       # return 'file uploaded successfully, we will redirect you to the page once your result ready'
       
+      # call another script
+      # myscript.my_func()
       return render_template('wait.html')
 
 RESULT_FOLDER = '/Users/stlp/Desktop/index/results/' # os.path.join('static', 'people_photo')
@@ -97,6 +101,14 @@ def remove():
         return render_template("index.html")
     except Exception as e:
         return f"Error in deleting files: {e}"
+
+
+@app.route("/trigger-python", methods=['GET', 'POST'])
+def print_something():
+    print("Successful line print")
+    ms.my_func()
+    return 'OK'
+
 
 if __name__ == '__main__':
     app.run(debug=True)

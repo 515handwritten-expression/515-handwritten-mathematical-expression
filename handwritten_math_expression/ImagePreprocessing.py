@@ -156,7 +156,7 @@ def imgStandardize(imgs,Position):
     return standard_imgs
 
 #Segment test images 
-def testImageSegementation(filepath):
+'''def testImageSegementation(filepath):
     files = glob.glob(filepath)
     # path is 'data/testData/*.png'
     num = 0
@@ -189,7 +189,7 @@ def testImageSegementation(filepath):
             picklepath = path + '/' + fileid + '.pkl'
             with open(picklepath,"wb") as f_dump:
                 pickle.dump(img_loc, f_dump)
-            f_dump.close()
+            f_dump.close()'''
 
 # Read ground truth from inkml file (for training)
 def readCharacterListFromInkmlFile(filename):
@@ -231,7 +231,7 @@ def groundTruthParser(ground_truth):
     return gt_list
 
 # Segment training data 
-def trainImageSegementation(inkmlfilepath):
+'''def trainImageSegementation(inkmlfilepath):
     files = glob.glob(inkmlfilepath)
     num = 0
     for inkmlfilename in files:
@@ -256,11 +256,11 @@ def trainImageSegementation(inkmlfilepath):
                 else: 
                     os.mkdir(path)
                     imgpath = path + '/' + ground_truth[i] + '_1.png'
-                cv2.imwrite(imgpath, imgs[i]['segment_img'])
+                cv2.imwrite(imgpath, imgs[i]['segment_img'])'''
 
 
 #filepath = 'data/trainData/*.inkml' 
 #trainImageSegementation(filepath)
-filepath = 'data/predPNG/*.png' 
-testImageSegementation(filepath)
+#filepath = 'data/predPNG/*.png' 
+#testImageSegementation(filepath)
 # %

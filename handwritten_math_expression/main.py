@@ -8,12 +8,6 @@ from keras.preprocessing.image import load_img, img_to_array
 import ImagePreprocessing as ip
 import stringCalculation, stringMathJaxConverter, generateStrForLatexAndTree
 
-labels = []
-positions = []
-numeric = string.digits + "e" + "pi"
-image_inputpath = './data/testimg/testinkml_1.png'
-segimg_savepath = './data/testimg'
-
 #read in input image and do segmantation and resize
 def predictImageSegementation(filename,savepath):
     #13 need to be changed according to input path
@@ -47,7 +41,6 @@ def predictImageSegementation(filename,savepath):
 
 # input the path of a single image, output a single label
 def predict_single_label(input_img_path,model,label_map):
-
     #input image for prediction, a single image at a time
     image = load_img(input_img_path,target_size=(32, 32), color_mode="grayscale")
     input_arr = img_to_array(image)
@@ -73,7 +66,6 @@ class ModelInputError(Exception):
     def __init__(self):
         self.msg = "Unable to file segments and/or location file"
 
-filepath = "/trainPNGSeg/Shareddrives/515_handwritten/test_2"
 
 #input a folder with all segments.npg and a position.pkl
 #output a list of labels and a list of positions
@@ -95,6 +87,12 @@ def write_labels_for_all_segs(filepath):
       else:
         raise ModelInputError
   return label,positions
+
+
+labels = []
+positions = []
+image_inputpath = './data/testimg/testinkml_1.png'
+segimg_savepath = './data/testimg'
 
 predictImageSegementation(image_inputpath,segimg_savepath)
 (labels,positions) = write_labels_for_all_segs(segimg_savepath)

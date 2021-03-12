@@ -1,3 +1,4 @@
+#Given two rectangl positions and return the relationship
 def verifyRecRelationship(rec_a, rec_b):
     w1_a,h1_a,w2_a,h2_a = rec_a
     w1_b,h1_b,w2_b,h2_b = rec_b
@@ -12,9 +13,12 @@ def verifyRecRelationship(rec_a, rec_b):
     else:
         return 'parallel'
  
+#According to the positions between characters and labels return a string
 def convertLabelIntoExpressionStr(labels,position):
     id = 0
+    hat = 0
     labels = ['/' if a=='div' else a for a in labels]
+    labels = ['*' if a=='times' else a for a in labels]
     if('-' in labels):
         index_m = [ind for ind, j in enumerate(labels) if j == "-"]
         for i in index_m:
@@ -23,22 +27,25 @@ def convertLabelIntoExpressionStr(labels,position):
                 id = i
     for x in range(len(labels)-1):
         if(verifyRecRelationship(position[x],position[x+1]) == 'power'):
+            hat += 1
             labels.insert(x+1,'^')
     if(id != 0):
         labels.insert(0,'(')
-        labels.insert(id+1,')')
-        labels.insert(i+3,'(')
+        labels.insert(id+1+hat,')')
+        labels.insert(i+3+hat,'(')
         labels.append(')')
     str1 = ''
     for label in labels:
         str1 = str1 + label
     return str1
 
+#Get rid off the native symbols in the string
 def removeNegativeSymbol(inputstr):
     if(inputstr[0]=='-'):
         inputstr = '0' + inputstr
     inputstr = inputstr.replace('(-','(0-')
     return inputstr
+
 
 def getStringsForLatexAndTree(labels,positions):
     str_latex = convertLabelIntoExpressionStr(labels,positions)

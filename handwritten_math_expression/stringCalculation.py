@@ -3,6 +3,7 @@ import re
 import math
 import os.path
 from os import path
+import string
 
 class Node():
     def __init__(self, value):
@@ -17,7 +18,7 @@ def infixToPostfix(expression):
     prec = {'+': 2, '-': 2, '*': 3, '/': 3, '(': 1 ,'^':4}
     while(index < len(expression)):
         element = expression[index]
-        if element in "+-*/^":
+        if(element in "+-*^/"):
             if stack == []:
                 stack.append(element)
             else:
@@ -40,18 +41,24 @@ def infixToPostfix(expression):
         else:
             postfix.append(element)
         index += 1
+
     while stack != []:
         postfix.append(stack.pop())
+
     return [Node(x) for x in postfix]
 
-def calc(postfix):
+
+def expressionTree(expression):
+    expression = expression.replace("pi","3.1415")
+    expression = expression.replace("e","2.718")
+    expression = re.findall(r"([A-Z]+|[0-9.]+|\d|[-+()/*^])", expression)
+    postfix = infixToPostfix(expression)
     stack = []
     for node in postfix:
-        print(node.value)
         if node.value in "+-*/^":
             try:
-                rightVal = int(stack.pop())
-                leftVal = int(stack.pop())
+                rightVal = float(stack.pop())
+                leftVal = float(stack.pop())
             except ValueError:
                 print("\nCannot calculate result. Expression has non integer operands.")
                 break
@@ -66,19 +73,25 @@ def calc(postfix):
                 stack.append(leftVal * rightVal)
             elif node.value == '^':
                 stack.append(math.pow(leftVal, rightVal))
-            elif node.vale == '/':
+            else:
                 stack.append(leftVal / rightVal)
         else:
             stack.append(node.value)
     else:
         if not stack:
             stack.append(0)
-        result = stack.pop()
-        return result
-
-def expressionTree(expression):
-    postfix = infixToPostfix(expression)
-    return calc(postfix)
+        calc_result = stack.pop()
+        
+    stack = []
+    for node in postfix:
+        if node.value in '+-*/^':
+            node.right = stack.pop()
+            node.left = stack.pop()
+            stack.append(node)
+        else:
+            stack.append(node)
+    calc_result = round(calc_result, 4)
+    return calc_result
 
 def writeCalResult(expression):
     try:
@@ -90,17 +103,3 @@ def writeCalResult(expression):
     f = open("calculationResult.txt", "w")
     f.write(str(result))
     f.close()
-    
-'''
-    stack = []
-    for node in postfix:
-        print(node.value)
-        if node.value in '+-*/^':
-            node.right = stack.pop()
-            node.left = stack.pop()
-            stack.append(node)
-        else:
-            stack.append(node)
-    return {stack.pop()} if stack != [] else None
-'''
-

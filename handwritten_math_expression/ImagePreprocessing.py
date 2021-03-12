@@ -153,7 +153,7 @@ def imgStandardize(imgs,Position):
     for i in range(len(character_list)):
         standard_imgs.append({'location':loc[i],'segment_img':character_list[i]})
         #Sort the images along with the horizontal direction 
-        standard_imgs.sort(key=lambda x:x['location'][0]) 
+        #standard_imgs.sort(key=lambda x:x['location'][0]) 
     return standard_imgs
 
 #Segment test images 

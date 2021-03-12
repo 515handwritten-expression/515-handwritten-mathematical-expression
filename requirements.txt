@@ -3,7 +3,7 @@ backcall==0.2.0
 colorama==0.4.4
 cycler==0.10.0
 decorator==4.4.2
-h5py==3.2.1
+h5py
 imageio==2.9.0
 ipykernel==5.5.0
 ipython==7.21.0

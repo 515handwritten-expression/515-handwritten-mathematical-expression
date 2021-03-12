@@ -3,8 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Handwritten Mathematical Expressions</title>
-
+<style></style>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 </head>
+<body>
+
 
 <body>
 <h1>Handwritten Mathematical Expressions </a> </h1>
@@ -22,9 +25,21 @@
 <p>We will redirect you to the page once your result is ready.</p>
 
 <script>
-    setTimeout(function(){
-        window.location.href = 'http://127.0.0.1:5000/result';
-    }, 2000);
+    
+
+    console.log("hi")
+
+
+    $.ajax({
+	  type: "POST",
+	  url: "/trigger-python",
+	  //data: { param: text}
+	}).done(function( o ) {
+	   alert('Calculation Finished');
+	   window.location.href = 'http://127.0.0.1:5000/result';
+	});
+
+
 </script>
 
 

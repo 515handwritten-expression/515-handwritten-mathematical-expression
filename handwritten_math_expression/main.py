@@ -6,7 +6,7 @@ from cv2 import cv2
 from keras.models import load_model
 from keras.preprocessing.image import load_img, img_to_array
 import ImagePreprocessing as ip
-import stringCalculation, stringMathJaxConverter, generateXMLTree
+import stringCalculation, stringMathJaxConverter, generateStrForLatexAndTree
 
 labels = []
 positions = []
@@ -98,7 +98,7 @@ def write_labels_for_all_segs(filepath):
 
 predictImageSegementation(image_inputpath,segimg_savepath)
 (labels,positions) = write_labels_for_all_segs(segimg_savepath)
-(string_for_latex,string_for_calc) = generateXMLTree.convertLabelIntoExpressionStr(labels,positions)
+(string_for_latex,string_for_calc) = generateStrForLatexAndTree.convertLabelIntoExpressionStr(labels,positions)
 
 # this function takes a string of expression, output calculation result to txt
 stringCalculation.writeCalResult(string_for_calc)

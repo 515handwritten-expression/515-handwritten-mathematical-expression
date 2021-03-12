@@ -1,12 +1,31 @@
 language: python
+
 python:
-  - "3.6"
+  - "2.7"
+  - "3.4"
+  - "3.5"
+  - "3.6"      # current default Python on Travis CI
+  - "3.6-dev"
   - "3.7"
+  - "3.8"
+  - "3.9"
+  - "3.9-dev"  # 3.9 development branch
+  - "nightly"  # nightly build
+
+before_install:
+  - python --version
+  - pip install -U pip
+  - pip install -U pytest
+  - pip install codecov
+  - pip install --upgrade setuptools
 
 install:
   - pip install -r requirements.txt
 
 script:
   - pytest
+
+after_success:
+  - codecov # submit coverage
 
 

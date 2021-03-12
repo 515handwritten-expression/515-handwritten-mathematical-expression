@@ -2,8 +2,8 @@ import numpy as np
 import os, string, pickle, shutil
 from os.path import isfile
 from cv2 import cv2
-import stringCalculation, stringMathJaxConverter, generateStrForLatexAndTree
-import ImagePreprocessing as ip
+from handwritten_math_expression import stringCalculation, stringMathJaxConverter, generateStrForLatexAndTree
+from handwritten_math_expression import ImagePreprocessing as ip
 from keras.models import load_model
 from keras.preprocessing.image import load_img, img_to_array
 

@@ -1,6 +1,8 @@
 import numpy as np
 import os, string, pickle
 from os.path import isfile
+import shutil
+from cv2 import cv2
 from keras.models import load_model
 from keras.preprocessing.image import load_img, img_to_array
 import ImagePreprocessing as ip
@@ -8,10 +10,39 @@ import ImagePreprocessing as ip
 labels = []
 positions = []
 numeric = string.digits + "e" + "pi"
-inputpath = './data/testimg/testinkml_1.png'
- = './data/testimg'
+image_inputpath = './data/testimg/testinkml_1.png'
+segimg_savepath = './data/testimg'
 
-ip.predictImageSegementation(inputpath,savepath)
+#read in input image and do segmantation and resize
+def predictImageSegementation(filename,savepath):
+    #13 need to be changed according to input path
+    fileid = filename[13:-4]
+    #Read in original image 
+    #Convert image 
+    binimg = ip.imgReadAndConvert(filename)
+    cropimgs, Position = ip.projectionSegmentation(binimg)
+    imgs = ip.imgStandardize(cropimgs,Position)
+    img_list = []
+    img_loc = []
+    for i in range(len(imgs)):
+        img_list.append(imgs[i]['segment_img'])
+        img_loc.append(imgs[i]['location'])
+    path = os.path.join(savepath, fileid)
+    if(os.path.exists(path)):
+        shutil.rmtree(path)
+    os.mkdir(path) 
+    for index, img in enumerate(img_list, start=1):
+        if index < 10:
+            strindex = '0' + str(index)
+        else:
+            strindex = str(index)
+        imgpath = path + '/' + strindex + '.png'
+        cv2.imwrite(imgpath, img)
+    #Store the position as a pickle file 
+    picklepath = path + '/' + fileid + '.pkl'
+    with open(picklepath,"wb") as f_dump:
+        pickle.dump(img_loc, f_dump)
+    f_dump.close()
 
 # input the path of a single image, output a single label
 def predict_single_label(input_img_path,model,label_map):
@@ -69,7 +100,7 @@ def write_labels_for_all_segs(filepath):
 
   return label,positions
 
-
-labels,positions = write_labels_for_all_segs(savepath)
+predictImageSegementation(image_inputpath,segimg_savepath)
+labels,positions = write_labels_for_all_segs(segimg_savepath)
 print("labels:", labels)
 print("positions:",positions)

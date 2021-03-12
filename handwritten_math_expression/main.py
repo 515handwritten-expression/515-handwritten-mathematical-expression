@@ -98,10 +98,10 @@ def write_labels_for_all_segs(filepath):
 
 predictImageSegementation(image_inputpath,segimg_savepath)
 (labels,positions) = write_labels_for_all_segs(segimg_savepath)
-(expression,string_for_latex) = generateXMLTree.convertLabelIntoExpressionStr(labels,positions)
+(string_for_latex,string_for_calc) = generateXMLTree.convertLabelIntoExpressionStr(labels,positions)
 
 # this function takes a string of expression, output calculation result to txt
-stringCalculation.writeCalResult(expression)
+stringCalculation.writeCalResult(string_for_calc)
 # this function takes a string of expression, output LaTex expression to txt
 stringMathJaxConverter.convertXmlMathjax(string_for_latex)
 

@@ -103,4 +103,4 @@ predictImageSegementation(image_inputpath,segimg_savepath)
 # this function takes a string of expression, output calculation result to txt
 stringCalculation.writeCalResult(string_for_calc)
 # this function takes a string of expression, output LaTex expression to txt
-stringMathJaxConverter.convertXmlMathjax(string_for_latex)
+stringMathJaxConverter.convertMathjax(string_for_latex)

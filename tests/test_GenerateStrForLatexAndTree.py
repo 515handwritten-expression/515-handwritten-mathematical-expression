@@ -64,3 +64,6 @@ class TestGenerateStrForLatexAndTree(unittest.TestCase):
         str1, str2 = gs.getStringsForLatexAndTree(label, position)
         self.assertEqual(str1, '-6')
         self.assertEqual(str2, '0-6')
+
+if __name__ == '__main__':
+    unittest.main()

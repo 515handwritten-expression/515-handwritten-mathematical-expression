@@ -2,7 +2,7 @@ import string
 import os.path
 from os import path
 
-def convertXmlMathjax(string):
+def convertMathjax(string):
     result = stringToMathJax(string)
     if path.exists("MathJaxResult.txt"):
         os.remove("MathJaxResult.txt")
@@ -13,9 +13,9 @@ def convertXmlMathjax(string):
 # return the MathJax expression from the parsed xml tree
 def stringToMathJax(string):
     #string.replace(old, new)
-    result = string.replace("pi","\pi")
-    result = result.replace("times","\\times")
-    result = result.replace("/" ,"\div")
+    result = string.replace("pi","\\pi")
+    result = result.replace("*","\\times")
+    result = result.replace("/" ,"\\div")
     result = result.replace("neq","\\neq")
     result = result.replace("geq" ,"\\geq")
     result = result.replace("gt" ,"\\gt")

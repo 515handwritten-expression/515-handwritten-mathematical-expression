@@ -1,4 +1,3 @@
-import plotly.express as px
 import xml.etree.ElementTree as ET
 from cv2 import cv2
 import numpy as np

@@ -7,7 +7,8 @@ from werkzeug.utils import secure_filename
 import jinja2
 import sys
 import myscript as ms
-# import myscript
+import shutil
+
 
 # ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 app = Flask(__name__)
@@ -83,15 +84,15 @@ def remove():
     file_list = [os.path.join(prefix, f) for f in os.listdir(prefix) if f.endswith('.txt')]
     
     input_path =  cwd + '/uploads/' # '/Users/stlp/Desktop/index/uploads/'
-    pr = os.path.abspath(input_path) 
-    in_list = [os.path.join(pr, f) for f in os.listdir(pr) if (f.endswith('.png'))  or (f.endswith('.jpg')) or (f.endswith('.jpeg'))]
-  
-    try:
-        # os.remove(input_filename)
-        # also delete two txt files
+    # pr = os.path.abspath(input_path) 
+    # in_list = [os.path.join(pr, f) for f in os.listdir(pr) if (f.endswith('.png'))  or (f.endswith('.jpg')) or (f.endswith('.jpeg'))]
 
-        for file in in_list:
-          os.remove(file)
+    try:
+ 
+        #for file in in_list:
+        #  os.remove(file)
+        shutil.rmtree(input_path)
+        os.mkdir(input_path) 
 
         # os.remove(output_filename)
         # os.remove(output_filename1)

@@ -71,8 +71,8 @@ class ModelInputError(Exception):
 #input a folder with all segments.npg and a position.pkl
 #output a list of labels and a list of positions
 def write_labels_for_all_segs(filepath):
-  model = load_model('LeNetModel_v3.h5')
-  label_map = 'label_map_v3.npy'
+  model = load_model('handwritten_math_expression/LeNetModel_v3.h5')
+  label_map = 'handwritten_math_expression/label_map_v3.npy'
   label = []
   positions = []
   for root,dir,files in os.walk(filepath):

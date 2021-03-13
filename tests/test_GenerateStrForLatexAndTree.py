@@ -77,23 +77,12 @@ class TestGenerateStrForLatexAndTree(unittest.TestCase):
         self.assertEqual(mock_verifyRecRelationship.call_count,1)
 
     @patch('handwritten_math_expression.generateStrForLatexAndTree.verifyRecRelationship')
-    def testConvertLabelIntoExpressionStr_m2(self, mock_verifyRecRelationship):
-        print("test_file_called")
-        label = ['1', '-', '2']
-        position = [[29, 204, 452, 237], [136, 282, 216, 365]]
-        mock_verifyRecRelationship.return_value = ("up")
-        gs.convertLabelIntoExpressionStr(label,position)
-        self.assertTrue(mock_verifyRecRelationship.called)
-
-
-    @patch('handwritten_math_expression.generateStrForLatexAndTree.verifyRecRelationship')
     def testConvertLabelIntoExpressionStr_m3(self, mock_verifyRecRelationship):
         print("test_file_called")
         label = ['a', 'b', 'c']
         position = [[29, 204, 452, 237], [136, 282, 216, 365], [0,0,0,0]]
         mock_verifyRecRelationship.return_value = ("parallel")
         str = gs.convertLabelIntoExpressionStr(label,position)
-        self.assertTrue(mock_verifyRecRelationship.called)
         self.assertEqual(str, "abc")
         self.assertEqual(mock_verifyRecRelationship.call_count,2)
 

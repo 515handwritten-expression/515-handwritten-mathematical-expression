@@ -70,6 +70,7 @@ def write_labels_for_all_segs(filepath):
   label_map = 'handwritten_math_expression/label_map_v3.npy'
   label = []
   positions = []
+  filepath = os.path.join(filepath, "imgseg")
   for root,dir,files in os.walk(filepath):
     for file in sorted(files):
       print("file:",file)

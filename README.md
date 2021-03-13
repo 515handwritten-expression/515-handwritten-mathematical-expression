@@ -3,7 +3,7 @@
 
 Our handwritten mathmatical expression recognization system aims to take handwritten mathematical expressions as inputs, recognizes the expressions, generate a printed version, and performs the calculation. We build and train a deep learning model to recognize handwritten expressions and implement a function to perform the calculation. We deliver the user-provided expressions in a readable and print-friendly format using LaTeX, along with the results of the expressions. 
 
-With our system, the pain of computing complex mathematical expressions by hand can be relifed. Our system is going to quickly convert the handwritten expressions to a machine-readable and generate the result.
+With our system, the pain of computing complex mathematical expressions by hand can be relifed. Our system is going to quickly convert the handwritten expressions to a machine-readable version and generate the calculation result.
 
 ### Directory Structure
 
@@ -31,11 +31,11 @@ Then, open the browser and go to the local host http://127.0.0.1:5000/, and you 
 
 
 #### How to use the systme
-To understand how to use the Hand-written Mathematical Expression Recognization System, please refer to the examples video demo.mov in the folder.
+To understand how to use the Hand-written Mathematical Expression Recognization System, please refer to the example video demo.mov in the folder.
 <ol>
 <li>The users first hit the <b>Choose file</b> buttom, and upload a <b>.png</b> file for the mathematical expression they want to use the system on. Then hit the <b>upload</b> buttom to upload the image.</li>
-<li>Once the image is uploaded, the website will show <b>calculating</b>, indicating the website is calculating.</li>
-<li>Once the calculation is finished, a printed version will be shown one the webpage. If the expression is calculable (containing only number), a calculation result will appear on the website.</li>
+<li>Once the image is uploaded, the website will show <b>calculating</b>, indicating that the website is calculating.</li>
+<li>Once the calculation is finished, a printed version of the expression will be shown on the webpage. If the expression is calculable (containing only numbers and calculable operations), a calculation result will appear on the website.</li>
 </ol>
 
 
@@ -65,6 +65,9 @@ Procedure:
 </ol>
 
 ### Limitations
+Currently, our system can only recognize the following symbols:
 
+-, (, ), [, ], {, }, +, =, , $.$, ${ \over }$, e, $\geq$, $\gt$, $\leq$, $\lt$, $\neq$, $\pi$, $\pm$, $\times$, $x$, and integers
 
+Our system can only perform calculation on numbers. Our system cannot solve functions that contain variables like $x$
 

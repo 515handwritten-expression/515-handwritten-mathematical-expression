@@ -100,12 +100,12 @@ class TestGenerateStrForLatexAndTree(unittest.TestCase):
 
     @patch('handwritten_math_expression.generateStrForLatexAndTree.convertLabelIntoExpressionStr')
     def testGetStringsForLatexAndTree(self, mock_convertLabelIntoExpressionStr):
-        label = ['a', 'b', 'c']
-        position = [[29, 204, 452, 237], [136, 282, 216, 365], [0 , 0, 0, 0]]
-        mock_convertLabelIntoExpressionStr.return_value = ("1+1")
+        label = ['1']
+        position = [[0 , 0, 0, 0]]
+        mock_convertLabelIntoExpressionStr.return_value = "1"
         str = gs.getStringsForLatexAndTree(label,position)
         self.assertTrue(mock_convertLabelIntoExpressionStr.called)
-        self.assertEqual(str,"1+1")
+        self.assertEqual(str,"1")
 
 
 if __name__ == '__main__':

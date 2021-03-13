@@ -112,9 +112,8 @@ def writeCalResult(expression):
         result = expressionTree(expression)
     except IncalculableError:
         result = "Unable to calculate"
-    if path.exists("index/results/calculationResult.txt"):
-        os.remove("index/results/calculationResult.txt")
-    f = open("index/results/calculationResult.txt", "w")
+    if path.exists("results/calculationResult.txt"):
+        os.remove("results/calculationResult.txt")
+    f = open("results/calculationResult.txt", "w")
     f.write(str(result))
     f.close()
-    

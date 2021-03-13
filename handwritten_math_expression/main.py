@@ -91,6 +91,7 @@ segimg_savepath = 'handwritten_math_expression/index/uploads'
 
 predictImageSegementation(image_inputpath,segimg_savepath)
 (labels,positions) = write_labels_for_all_segs(segimg_savepath)
+print(labels,positions)
 (string_for_latex,string_for_calc) = generateStrForLatexAndTree.convertLabelIntoExpressionStr(labels,positions)
 
 # this function takes a string of expression, output calculation result to txt

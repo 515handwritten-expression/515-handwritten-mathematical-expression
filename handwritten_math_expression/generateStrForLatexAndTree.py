@@ -48,7 +48,11 @@ def removeNegativeSymbol(inputstr):
 
 
 def getStringsForLatexAndTree(labels,positions):
-    str_latex = convertLabelIntoExpressionStr(labels,positions)
-    str_tree = str_latex
-    str_tree = removeNegativeSymbol(str_tree)
+    if(len(labels)>1):
+        str_latex = convertLabelIntoExpressionStr(labels,positions)
+        str_tree = str_latex
+        str_tree = removeNegativeSymbol(str_tree)
+    else:
+        str_tree = labels[0]
+        str_latex = labels[0]
     return str_latex, str_tree

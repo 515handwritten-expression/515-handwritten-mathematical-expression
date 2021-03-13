@@ -2,41 +2,43 @@ import numpy as np
 import os, string, pickle, shutil
 from os.path import isfile
 from cv2 import cv2
+import glob
 from handwritten_math_expression import stringCalculation, stringMathJaxConverter, generateStrForLatexAndTree
 from handwritten_math_expression import ImagePreprocessing as ip
 from keras.models import load_model
 from keras.preprocessing.image import load_img, img_to_array
 
 #read in input image and do segmantation and resize
-def predictImageSegementation(filename,savepath):
-    #13 need to be changed according to input path
-    fileid = filename[13:-4]
-    #Read in original image 
-    #Convert image 
-    binimg = ip.imgReadAndConvert(filename)
-    cropimgs, Position = ip.projectionSegmentation(binimg)
-    imgs = ip.imgStandardize(cropimgs,Position)
-    img_list = []
-    img_loc = []
-    for i in range(len(imgs)):
-        img_list.append(imgs[i]['segment_img'])
-        img_loc.append(imgs[i]['location'])
-    path = os.path.join(savepath, fileid)
-    if(os.path.exists(path)):
-        shutil.rmtree(path)
-    os.mkdir(path) 
-    for index, img in enumerate(img_list, start=1):
-        if index < 10:
-            strindex = '0' + str(index)
-        else:
-            strindex = str(index)
-        imgpath = path + '/' + strindex + '.png'
-        cv2.imwrite(imgpath, img)
-    #Store the position as a pickle file 
-    picklepath = path + '/' + fileid + '.pkl'
-    with open(picklepath,"wb") as f_dump:
-        pickle.dump(img_loc, f_dump)
-    f_dump.close()
+def predictImageSegementation(uploadpath,savepath):
+    files = glob.glob(uploadpath)
+    for filename in files:
+        fileid = filename[42:-4]
+        #Read in original image 
+        #Convert image 
+        binimg = ip.imgReadAndConvert(filename)
+        cropimgs, Position = ip.projectionSegmentation(binimg)
+        imgs = ip.imgStandardize(cropimgs,Position)
+        img_list = []
+        img_loc = []
+        for i in range(len(imgs)):
+            img_list.append(imgs[i]['segment_img'])
+            img_loc.append(imgs[i]['location'])
+        path = os.path.join(savepath, fileid)
+        if(os.path.exists(path)):
+            shutil.rmtree(path)
+        os.mkdir(path) 
+        for index, img in enumerate(img_list, start=1):
+            if index < 10:
+                strindex = '0' + str(index)
+            else:
+                strindex = str(index)
+            imgpath = path + '/' + strindex + '.png'
+            cv2.imwrite(imgpath, img)
+        #Store the position as a pickle file 
+        picklepath = path + '/' + fileid + '.pkl'
+        with open(picklepath,"wb") as f_dump:
+            pickle.dump(img_loc, f_dump)
+        f_dump.close()
 
 # input the path of a single image, output a single label
 def predict_single_label(input_img_path,model,label_map):
@@ -73,7 +75,6 @@ def write_labels_for_all_segs(filepath):
   label_map = 'label_map_v3.npy'
   label = []
   positions = []
-
   for root,dir,files in os.walk(filepath):
     for file in sorted(files):
       if file.endswith('png'):
@@ -90,8 +91,8 @@ def write_labels_for_all_segs(filepath):
 
 labels = []
 positions = []
-image_inputpath = './data/testimg/testinkml_1.png'
-segimg_savepath = './data/testimg'
+image_inputpath = 'handwritten_math_expression/index/uploads/*.png' 
+segimg_savepath = 'handwritten_math_expression/index/results'
 
 predictImageSegementation(image_inputpath,segimg_savepath)
 (labels,positions) = write_labels_for_all_segs(segimg_savepath)

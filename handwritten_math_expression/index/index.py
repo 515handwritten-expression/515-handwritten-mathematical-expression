@@ -5,9 +5,11 @@ from os import walk
 from flask import Flask, render_template, request, redirect, url_for, current_app, flash
 from werkzeug.utils import secure_filename
 import jinja2
-import sys
-import myscript as ms
 import shutil
+import sys
+sys.path.append("..")
+import main as ms
+
 
 
 # ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}

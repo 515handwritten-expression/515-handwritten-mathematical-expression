@@ -1,7 +1,7 @@
 # Hand-written Mathematical Expression Recognization System
 [![Build Status](https://staging.travis-ci.com/515handwritten-expression/515-handwritten-mathematical-expression.svg?branch=main)](https://staging.travis-ci.com/515handwritten-expression/515-handwritten-mathematical-expression)
 
-Our handwritten mathmatical expression recognization system aims to take handwritten mathematical expressions as inputs, recognize the expressions, perform the calculation, and generate a printed version of the results. We build and train a deep learning model to recognize handwritten expressions and implement a function to perform the calculation. We deliver the user-provided expressions in a readable and print-friendly format using LaTeX, along with the results of the expressions. 
+Our Handwritten Mathmatical Expression Recognization System aims to take handwritten mathematical expressions as inputs, recognize the expressions, perform the calculation, and generate a printed version of the results. We build and train a deep learning model to recognize handwritten expressions and implement a function to perform the calculation. We deliver the user-provided expressions in a readable and print-friendly format using LaTeX, along with the results of the expressions. 
 
 With our system, the pain of computing complex mathematical expressions by hand can be relifed. Our system is going to quickly convert the handwritten expressions to a machine-readable version and generate the calculation result.
 

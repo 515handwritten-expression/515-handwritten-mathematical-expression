@@ -59,14 +59,9 @@ def predict_single_label(input_img_path,model,label_map):
     predicted_class_indices=np.argmax(pred, axis =1 )
     class_indices = dict((v, k) for k, v in class_indices.items())
     predictions = [class_indices[k] for k in predicted_class_indices]
-    print(input_img_path)
-    print ("pred",predictions)
+    print("input_img_path:",input_img_path)
+    print("pred",predictions)
     return predictions
-
-class ModelInputError(Exception):
-    def __init__(self):
-        self.msg = "Unable to file segments and/or location file"
-
 
 #input a folder with all segments.npg and a position.pkl
 #output a list of labels and a list of positions
@@ -77,6 +72,7 @@ def write_labels_for_all_segs(filepath):
   positions = []
   for root,dir,files in os.walk(filepath):
     for file in sorted(files):
+      print("file:",file)
       if file.endswith('png'):
         single_label = predict_single_label(os.path.join(root, file),model,label_map)
         label += single_label
@@ -90,7 +86,7 @@ def write_labels_for_all_segs(filepath):
 labels = []
 positions = []
 image_inputpath = 'handwritten_math_expression/index/uploads/*.png' 
-segimg_savepath = 'handwritten_math_expression/index/uploads/imgseg'
+segimg_savepath = 'handwritten_math_expression/index/uploads/imgseg/'
 
 predictImageSegementation(image_inputpath,segimg_savepath)
 (labels,positions) = write_labels_for_all_segs(segimg_savepath)

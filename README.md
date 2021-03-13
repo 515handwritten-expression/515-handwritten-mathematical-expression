@@ -67,7 +67,7 @@ Procedure:
 ### Limitations
 Currently, our system can only recognize the following symbols:
 
--, (, ), [, ], {, }, +, =, , $.$, ${ \over }$, e, $\geq$, $\gt$, $\leq$, $\lt$, $\neq$, $\pi$, $\pm$, $\times$, $x$, and integers
+-, (, ), [, ], {, }, +, =, , $$.$$, $${ \over }$$, e, $$\geq$$, $$\gt$$, $$\leq$$, $$\lt$$, $$\neq$$, $$\pi$$, $$\pm$$, $$\times$$, $$x$$, and integers
 
 Our system can only perform calculation on numbers. Our system cannot solve functions that contain variables like $x$
 

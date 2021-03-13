@@ -10,6 +10,7 @@ ipython
 ipython-genutils
 isort
 jedi
+jinja2
 jupyter-client
 jupyter-core
 Keras

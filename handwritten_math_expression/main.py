@@ -88,8 +88,8 @@ def write_labels_for_all_segs(filepath):
 def my_func():
     labels = []
     positions = []
-    image_inputpath = 'index/uploads/*.png' 
-    segimg_savepath = 'index/uploads'
+    image_inputpath = 'uploads/*.png' 
+    segimg_savepath = 'uploads'
 
     predictImageSegementation(image_inputpath,segimg_savepath)
     (labels,positions) = write_labels_for_all_segs(segimg_savepath)

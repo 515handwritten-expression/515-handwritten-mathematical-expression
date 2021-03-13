@@ -84,15 +84,13 @@ def write_labels_for_all_segs(filepath):
         print("pkl:",file)
         with open(os.path.join(root, file), 'rb') as f:
           positions = pickle.load(f)
-      else:
-        raise ModelInputError
   return label,positions
 
 
 labels = []
 positions = []
 image_inputpath = 'handwritten_math_expression/index/uploads/*.png' 
-segimg_savepath = 'handwritten_math_expression/index/uploads'
+segimg_savepath = 'handwritten_math_expression/index/uploads/imgseg'
 
 predictImageSegementation(image_inputpath,segimg_savepath)
 (labels,positions) = write_labels_for_all_segs(segimg_savepath)

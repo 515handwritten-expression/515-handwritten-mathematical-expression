@@ -58,7 +58,12 @@ def getStringsForLatexAndTree(labels,positions):
         str_latex = labels[0]
     return str_latex, str_tree
 
-
+"""
 label = ['pi', '-', '3']
 position = [[71, 83, 183, 184], [29, 204, 452, 237], [136, 282, 216, 365]]
 print(convertLabelIntoExpressionStr(label, position))
+"""
+label = ['-', '6']
+position = [[71, 83, 183, 184], [204, 90, 265, 186]]
+print(convertLabelIntoExpressionStr(label, position))
+print(getStringsForLatexAndTree(label, position))

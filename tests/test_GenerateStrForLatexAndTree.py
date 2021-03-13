@@ -65,15 +65,12 @@ class TestGenerateStrForLatexAndTree(unittest.TestCase):
         self.assertEqual(str1, '-6')
         self.assertEqual(str2, '0-6')
 
-    @patch('handwritten_math_expression.generateStrForLatexAndTree.convertLabelIntoExpressionStr')
-    def testGetStringsForLatexAndTree_m1(self, mock_convertLabelIntoExpressionStr):
+    def testgetStringsForLatexAndTree_3(self):
         label = ['1']
-        position = [[0 , 0, 0, 0]]
-        mock_convertLabelIntoExpressionStr.return_value = "1"
-        str1, str2 = gs.getStringsForLatexAndTree(label,position)
-        self.assertTrue(mock_convertLabelIntoExpressionStr.called)
-        self.assertEqual(str1,"1")
-        self.assertEqual(str2,"1")
+        position = [[30, 101, 198, 115]]
+        str1, str2 = gs.getStringsForLatexAndTree(label, position)
+        self.assertEqual(str1, '1')
+        self.assertEqual(str2, '1')
 
     @patch('handwritten_math_expression.generateStrForLatexAndTree.convertLabelIntoExpressionStr')
     def testGetStringsForLatexAndTree_m2(self, mock_convertLabelIntoExpressionStr):

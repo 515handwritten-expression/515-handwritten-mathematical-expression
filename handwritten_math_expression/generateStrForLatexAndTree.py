@@ -3,13 +3,11 @@
 def verifyRecRelationship(rec_a, rec_b):
     w1_a,h1_a,w2_a,h2_a = rec_a
     w1_b,h1_b,w2_b,h2_b = rec_b
-    heighta = h2_a - h1_a
-    heightb = h2_b - h1_b
     #b is 'div'
     if(h2_a <= h1_b and w2_a <= w2_b and w1_a >= w1_b):
         return 'up'
     #a is root
-    elif(h1_b < h1_a and w1_b > w2_a and heightb <= heighta/3 * 2):
+    elif(h1_b < h1_a and w1_b > w2_a and (h2_b - h1_b) <= (h2_a - h1_a)/3 * 2):
         return 'power'
     else:
         return 'parallel'
@@ -57,13 +55,3 @@ def getStringsForLatexAndTree(labels,positions):
         str_tree = labels[0]
         str_latex = labels[0]
     return str_latex, str_tree
-
-"""
-label = ['pi', '-', '3']
-position = [[71, 83, 183, 184], [29, 204, 452, 237], [136, 282, 216, 365]]
-print(convertLabelIntoExpressionStr(label, position))
-"""
-label = ['-', '6']
-position = [[71, 83, 183, 184], [204, 90, 265, 186]]
-print(convertLabelIntoExpressionStr(label, position))
-print(getStringsForLatexAndTree(label, position))

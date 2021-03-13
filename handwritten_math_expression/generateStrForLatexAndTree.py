@@ -1,3 +1,4 @@
+
 #Given two rectangl positions and return the relationship
 def verifyRecRelationship(rec_a, rec_b):
     w1_a,h1_a,w2_a,h2_a = rec_a
@@ -56,3 +57,8 @@ def getStringsForLatexAndTree(labels,positions):
         str_tree = labels[0]
         str_latex = labels[0]
     return str_latex, str_tree
+
+
+label = ['pi', '-', '3']
+position = [[71, 83, 183, 184], [29, 204, 452, 237], [136, 282, 216, 365]]
+print(convertLabelIntoExpressionStr(label, position))

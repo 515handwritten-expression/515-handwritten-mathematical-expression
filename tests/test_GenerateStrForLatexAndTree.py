@@ -65,27 +65,6 @@ class TestGenerateStrForLatexAndTree(unittest.TestCase):
         self.assertEqual(str1, '-6')
         self.assertEqual(str2, '0-6')
 
-    @patch('handwritten_math_expression.generateStrForLatexAndTree.verifyRecRelationship')
-    def testConvertLabelIntoExpressionStr_m1(self, mock_verifyRecRelationship):
-        print("test_file_called")
-        label = ['a', '2']
-        position = [[29, 204, 452, 237], [136, 282, 216, 365]]
-        mock_verifyRecRelationship.return_value = ("power")
-        str = gs.convertLabelIntoExpressionStr(label,position)
-        self.assertTrue(mock_verifyRecRelationship.called)
-        self.assertEqual(str, "a^2")
-        self.assertEqual(mock_verifyRecRelationship.call_count,1)
-
-    @patch('handwritten_math_expression.generateStrForLatexAndTree.verifyRecRelationship')
-    def testConvertLabelIntoExpressionStr_m3(self, mock_verifyRecRelationship):
-        print("test_file_called")
-        label = ['a', 'b', 'c']
-        position = [[29, 204, 452, 237], [136, 282, 216, 365], [0,0,0,0]]
-        mock_verifyRecRelationship.return_value = ("parallel")
-        str = gs.convertLabelIntoExpressionStr(label,position)
-        self.assertEqual(str, "abc")
-        self.assertEqual(mock_verifyRecRelationship.call_count,2)
-
     @patch('handwritten_math_expression.generateStrForLatexAndTree.convertLabelIntoExpressionStr')
     def testGetStringsForLatexAndTree_m1(self, mock_convertLabelIntoExpressionStr):
         label = ['1']
@@ -105,6 +84,34 @@ class TestGenerateStrForLatexAndTree(unittest.TestCase):
         self.assertTrue(mock_convertLabelIntoExpressionStr.called)
         self.assertEqual(str1, '-6')
         self.assertEqual(str2, '0-6')
+
+    @patch('handwritten_math_expression.generateStrForLatexAndTree.verifyRecRelationship')
+    def testConvertLabelIntoExpressionStr_m1(self, mock_verifyRecRelationship):
+        label = ['a', '2']
+        position = [[29, 204, 452, 237], [136, 282, 216, 365]]
+        mock_verifyRecRelationship.return_value = ("power")
+        str = gs.convertLabelIntoExpressionStr(label,position)
+        self.assertTrue(mock_verifyRecRelationship.called)
+        self.assertEqual(str, "a^2")
+        self.assertEqual(mock_verifyRecRelationship.call_count,1)
+
+    @patch('handwritten_math_expression.generateStrForLatexAndTree.verifyRecRelationship')
+    def testConvertLabelIntoExpressionStr_m2(self, mock_verifyRecRelationship):
+        label = ['pi', '-', '3']
+        position = [[71, 83, 183, 184], [29, 204, 452, 237], [136, 282, 216, 365]]
+        mock_verifyRecRelationship.return_value = ("up")
+        str = gs.convertLabelIntoExpressionStr(label,position)
+        self.assertTrue(mock_verifyRecRelationship.called)
+        self.assertEqual(str, "(pi)/(3)")
+
+    @patch('handwritten_math_expression.generateStrForLatexAndTree.verifyRecRelationship')
+    def testConvertLabelIntoExpressionStr_m3(self, mock_verifyRecRelationship):
+        label = ['a', 'b', 'c']
+        position = [[29, 204, 452, 237], [136, 282, 216, 365], [0,0,0,0]]
+        mock_verifyRecRelationship.return_value = ("parallel")
+        str = gs.convertLabelIntoExpressionStr(label,position)
+        self.assertEqual(str, "abc")
+        self.assertEqual(mock_verifyRecRelationship.call_count,2)
 
 if __name__ == '__main__':
     unittest.main()

@@ -4,9 +4,9 @@ from os import path
 
 def convertMathjax(string):
     result = stringToMathJax(string)
-    if path.exists("MathJaxResult.txt"):
-        os.remove("MathJaxResult.txt")
-    f = open("MathJaxResult.txt", "w")
+    if path.exists("index/results/MathJaxResult.txt"):
+        os.remove("index/results/MathJaxResult.txt")
+    f = open("index/results/MathJaxResult.txt", "w")
     f.write(str(result))
     f.close()
 

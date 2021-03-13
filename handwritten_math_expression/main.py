@@ -68,8 +68,8 @@ def predict_single_label(input_img_path,model,label_map):
 #input a folder with all segments.npg and a position.pkl
 #output a list of labels and a list of positions
 def write_labels_for_all_segs(filepath):
-  model = load_model('LeNetModel_v3.h5')
-  label_map = 'label_map_v3.npy'
+  model = load_model('../LeNetModel_v3.h5')
+  label_map = '../label_map_v3.npy'
   label = []
   positions = []
   filepath = os.path.join(filepath, "imgseg")

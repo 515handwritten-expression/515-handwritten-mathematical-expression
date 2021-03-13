@@ -3,8 +3,10 @@ import os, string, pickle, shutil
 from os.path import isfile
 from cv2 import cv2
 import glob
-from handwritten_math_expression import stringCalculation, stringMathJaxConverter, generateStrForLatexAndTree
-from handwritten_math_expression import ImagePreprocessing as ip
+# from handwritten_math_expression 
+import stringCalculation, stringMathJaxConverter, generateStrForLatexAndTree
+# from handwritten_math_expression 
+import ImagePreprocessing as ip
 from keras.models import load_model
 from keras.preprocessing.image import load_img, img_to_array
 
@@ -66,8 +68,8 @@ def predict_single_label(input_img_path,model,label_map):
 #input a folder with all segments.npg and a position.pkl
 #output a list of labels and a list of positions
 def write_labels_for_all_segs(filepath):
-  model = load_model('handwritten_math_expression/LeNetModel_v3.h5')
-  label_map = 'handwritten_math_expression/label_map_v3.npy'
+  model = load_model('LeNetModel_v3.h5')
+  label_map = 'label_map_v3.npy'
   label = []
   positions = []
   filepath = os.path.join(filepath, "imgseg")
@@ -83,18 +85,24 @@ def write_labels_for_all_segs(filepath):
           positions = pickle.load(f)
   return label,positions
 
+def my_func():
+    labels = []
+    positions = []
+    image_inputpath = 'index/uploads/*.png' 
+    segimg_savepath = 'index/uploads'
 
-labels = []
-positions = []
-image_inputpath = 'handwritten_math_expression/index/uploads/*.png' 
-segimg_savepath = 'handwritten_math_expression/index/uploads'
+    predictImageSegementation(image_inputpath,segimg_savepath)
+    (labels,positions) = write_labels_for_all_segs(segimg_savepath)
+    # print(labels,positions)
+    string_for_latex,string_for_calc = generateStrForLatexAndTree.getStringsForLatexAndTree(labels,positions)
 
-predictImageSegementation(image_inputpath,segimg_savepath)
-(labels,positions) = write_labels_for_all_segs(segimg_savepath)
-print(labels,positions)
-(string_for_latex,string_for_calc) = generateStrForLatexAndTree.convertLabelIntoExpressionStr(labels,positions)
+    # this function takes a string of expression, output calculation result to txt
+    stringCalculation.writeCalResult(string_for_calc)
+    # this function takes a string of expression, output LaTex expression to txt
+    stringMathJaxConverter.convertMathjax(string_for_latex)
 
-# this function takes a string of expression, output calculation result to txt
-stringCalculation.writeCalResult(string_for_calc)
-# this function takes a string of expression, output LaTex expression to txt
-stringMathJaxConverter.convertMathjax(string_for_latex)
+
+if __name__ == '__main__':
+    # test1.py executed as script
+    # do something
+    my_func()

@@ -99,14 +99,24 @@ class TestGenerateStrForLatexAndTree(unittest.TestCase):
         self.assertEqual(mock_verifyRecRelationship.call_count,2)
 
     @patch('handwritten_math_expression.generateStrForLatexAndTree.convertLabelIntoExpressionStr')
-    def testGetStringsForLatexAndTree(self, mock_convertLabelIntoExpressionStr):
+    def testGetStringsForLatexAndTree_m1(self, mock_convertLabelIntoExpressionStr):
         label = ['1']
         position = [[0 , 0, 0, 0]]
         mock_convertLabelIntoExpressionStr.return_value = "1"
-        str = gs.getStringsForLatexAndTree(label,position)
+        str1, str2 = gs.getStringsForLatexAndTree(label,position)
         self.assertTrue(mock_convertLabelIntoExpressionStr.called)
-        self.assertEqual(str,"1")
+        self.assertEqual(str1,"1")
+        self.assertEqual(str2,"1")
 
+    @patch('handwritten_math_expression.generateStrForLatexAndTree.convertLabelIntoExpressionStr')
+    def testGetStringsForLatexAndTree_m2(self, mock_convertLabelIntoExpressionStr):
+        label = ['-', '6']
+        position = [[30, 101, 198, 115], [283, 17, 486, 231]]
+        mock_convertLabelIntoExpressionStr.return_value = "-6"
+        str1, str2 = gs.getStringsForLatexAndTree(label,position)
+        self.assertTrue(mock_convertLabelIntoExpressionStr.called)
+        self.assertEqual(str1, '-6')
+        self.assertEqual(str2, '0-6')
 
 if __name__ == '__main__':
     unittest.main()

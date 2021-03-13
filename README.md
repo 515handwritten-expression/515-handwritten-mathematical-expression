@@ -67,7 +67,19 @@ Procedure:
 ### Limitations
 Currently, our system can only recognize the following symbols:
 
--, (, ), [, ], {, }, +, =, , ., $\frac{}{}$, e, $\geq$, $\gt$, $\leq$, $\lt$, $\neq$, $\pi$, $\pm$, $\times$, $x$, and integers
+-, (, ), [, ], {, }, +, =, , ., 
+<img src="https://render.githubusercontent.com/render/math?math=\frac{}{}">,
+e
+<img src="https://render.githubusercontent.com/render/math?math=\geq">,
+<img src="https://render.githubusercontent.com/render/math?math=\gt">,
+<img src="https://render.githubusercontent.com/render/math?math=\leq">,
+<img src="https://render.githubusercontent.com/render/math?math=\lt">,
+<img src="https://render.githubusercontent.com/render/math?math=\neq">,
+<img src="https://render.githubusercontent.com/render/math?math=\pi">,
+<img src="https://render.githubusercontent.com/render/math?math=\pm">,
+<img src="https://render.githubusercontent.com/render/math?math=\times">,
+<img src="https://render.githubusercontent.com/render/math?math=\x">,
+and integers
 
 Our system can only perform calculation on numbers. Our system cannot solve functions that contain variables like $`x`$
 

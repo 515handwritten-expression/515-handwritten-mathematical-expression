@@ -14,14 +14,19 @@ def convertMathjax(string):
 def stringToMathJax(string):
     result = ""
     str_seg = re.findall(r"([a-z]+|\d|[-+()/*^])", string)
+    numhat = re.findall(r"\^", string)
     i=0
-    for i in range(len(str_seg)+2):
-        element = str_seg[i]
-        if(element == "^"):
-          str_seg.insert(i+1, "{ ")
-          str_seg.insert(i+3, " }")
-    for ele in str_seg:
-      result += ele
+    if len(numhat) != 0:
+      for i in range(len(str_seg)+len(numhat)+1):
+          element = str_seg[i]
+          if(element == "^"):
+            str_seg.insert(i+1, "{ ")
+            str_seg.insert(i+3, " }")
+      for ele in str_seg:
+        result += ele
+    else:
+      result = string
+
     #string.replace(old, new)
     result = result.replace("+"," + ")
     result = result.replace("-"," - ")

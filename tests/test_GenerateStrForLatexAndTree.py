@@ -73,6 +73,16 @@ class TestGenerateStrForLatexAndTree(unittest.TestCase):
         self.assertEqual(str2, '1')
 
     @patch('handwritten_math_expression.generateStrForLatexAndTree.convertLabelIntoExpressionStr')
+    def testGetStringsForLatexAndTree_m1(self, mock_convertLabelIntoExpressionStr):
+        label = ['6']
+        position = [[283, 17, 486, 231]]
+        mock_convertLabelIntoExpressionStr.return_value = "6"
+        str1, str2 = gs.getStringsForLatexAndTree(label,position)
+        self.assertTrue(mock_convertLabelIntoExpressionStr.called)
+        self.assertEqual(str1, '6')
+        self.assertEqual(str2, '6')
+
+    @patch('handwritten_math_expression.generateStrForLatexAndTree.convertLabelIntoExpressionStr')
     def testGetStringsForLatexAndTree_m2(self, mock_convertLabelIntoExpressionStr):
         label = ['-', '6']
         position = [[30, 101, 198, 115], [283, 17, 486, 231]]
@@ -81,7 +91,7 @@ class TestGenerateStrForLatexAndTree(unittest.TestCase):
         self.assertTrue(mock_convertLabelIntoExpressionStr.called)
         self.assertEqual(str1, '-6')
         self.assertEqual(str2, '0-6')
-
+        
     @patch('handwritten_math_expression.generateStrForLatexAndTree.verifyRecRelationship')
     def testConvertLabelIntoExpressionStr_m1(self, mock_verifyRecRelationship):
         label = ['a', '2']
@@ -108,6 +118,15 @@ class TestGenerateStrForLatexAndTree(unittest.TestCase):
         mock_verifyRecRelationship.return_value = ("parallel")
         str = gs.convertLabelIntoExpressionStr(label,position)
         self.assertEqual(str, "abc")
+        self.assertEqual(mock_verifyRecRelationship.call_count,2)
+
+    @patch('handwritten_math_expression.generateStrForLatexAndTree.verifyRecRelationship')
+    def testConvertLabelIntoExpressionStr_m4(self, mock_verifyRecRelationship):
+        label = ['a', 'times', 'c']
+        position = [[29, 204, 452, 237], [136, 282, 216, 365], [0,0,0,0]]
+        mock_verifyRecRelationship.return_value = ("parallel")
+        str = gs.convertLabelIntoExpressionStr(label,position)
+        self.assertEqual(str, "a*c")
         self.assertEqual(mock_verifyRecRelationship.call_count,2)
 
 if __name__ == '__main__':

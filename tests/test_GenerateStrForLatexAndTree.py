@@ -43,8 +43,9 @@ class TestGenerateStrForLatexAndTree(unittest.TestCase):
         label = ['2', '3']
         position = [[29, 204, 452, 237], [136, 282, 216, 365]]
         mock_verifyRecRelationship.return_value = ("parallel")
-        gs.convertLabelIntoExpressionStr(label,position)
-        # self.assertTrue(mock_verifyRecRelationship.called)
+        str = gs.convertLabelIntoExpressionStr(label,position)
+        self.assertTrue(mock_verifyRecRelationship.called)
+        self.assertEqual(str, "23")
         self.assertEqual(mock_verifyRecRelationship.call_count,1)
 
 

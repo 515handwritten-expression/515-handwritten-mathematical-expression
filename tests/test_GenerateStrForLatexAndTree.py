@@ -66,7 +66,7 @@ class TestGenerateStrForLatexAndTree(unittest.TestCase):
         self.assertEqual(str2, '0-6')
 
     @patch('handwritten_math_expression.generateStrForLatexAndTree.verifyRecRelationship')
-    def testConvertLabelIntoExpressionStr_1(self, mock_verifyRecRelationship):
+    def testConvertLabelIntoExpressionStr_m1(self, mock_verifyRecRelationship):
         print("test_file_called")
         label = ['a', '2']
         position = [[29, 204, 452, 237], [136, 282, 216, 365]]
@@ -77,7 +77,18 @@ class TestGenerateStrForLatexAndTree(unittest.TestCase):
         self.assertEqual(mock_verifyRecRelationship.call_count,1)
 
     @patch('handwritten_math_expression.generateStrForLatexAndTree.verifyRecRelationship')
-    def testConvertLabelIntoExpressionStr_1(self, mock_verifyRecRelationship):
+    def testConvertLabelIntoExpressionStr_m2(self, mock_verifyRecRelationship):
+        print("test_file_called")
+        label = ['1', '-', '2']
+        position = [[29, 204, 452, 237], [136, 282, 216, 365]]
+        mock_verifyRecRelationship.return_value = ("up")
+        str = gs.convertLabelIntoExpressionStr(label,position)
+        self.assertTrue(mock_verifyRecRelationship.called)
+        self.assertEqual(str, "1/2")
+        self.assertEqual(mock_verifyRecRelationship.call_count,2)
+
+    @patch('handwritten_math_expression.generateStrForLatexAndTree.verifyRecRelationship')
+    def testConvertLabelIntoExpressionStr_m3(self, mock_verifyRecRelationship):
         print("test_file_called")
         label = ['a', 'b', 'c']
         position = [[29, 204, 452, 237], [136, 282, 216, 365], [0,0,0,0]]
@@ -86,6 +97,15 @@ class TestGenerateStrForLatexAndTree(unittest.TestCase):
         self.assertTrue(mock_verifyRecRelationship.called)
         self.assertEqual(str, "abc")
         self.assertEqual(mock_verifyRecRelationship.call_count,2)
+
+    @patch('handwritten_math_expression.generateStrForLatexAndTree.convertLabelIntoExpressionStr')
+    def testGetStringsForLatexAndTree(self, mock_convertLabelIntoExpressionStr):
+        label = ['a', 'b', 'c']
+        position = [[29, 204, 452, 237], [136, 282, 216, 365], [0 , 0, 0, 0]]
+        mock_convertLabelIntoExpressionStr.return_value = ("1+1")
+        str = gs.getStringsForLatexAndTree(label,position)
+        self.assertTrue(mock_convertLabelIntoExpressionStr.called)
+        self.assertEqual(str,"1+1")
 
 
 if __name__ == '__main__':

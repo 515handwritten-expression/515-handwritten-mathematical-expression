@@ -78,7 +78,7 @@ class TestGenerateStrForLatexAndTree(unittest.TestCase):
         position = [[283, 17, 486, 231]]
         mock_convertLabelIntoExpressionStr.return_value = "6"
         str1, str2 = gs.getStringsForLatexAndTree(label,position)
-        self.assertTrue(mock_convertLabelIntoExpressionStr.called)
+        self.assertFalse(mock_convertLabelIntoExpressionStr.called)
         self.assertEqual(str1, '6')
         self.assertEqual(str2, '6')
 

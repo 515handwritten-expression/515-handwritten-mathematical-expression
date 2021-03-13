@@ -11,8 +11,8 @@ from keras.preprocessing.image import load_img, img_to_array
 #read in input image and do segmantation and resize
 def predictImageSegementation(uploadpath,savepath):
     files = glob.glob(uploadpath)
+    fileid = 'imgseg'
     for filename in files:
-        fileid = filename[42:-4]
         #Read in original image 
         #Convert image 
         binimg = ip.imgReadAndConvert(filename)
@@ -92,7 +92,7 @@ def write_labels_for_all_segs(filepath):
 labels = []
 positions = []
 image_inputpath = 'handwritten_math_expression/index/uploads/*.png' 
-segimg_savepath = 'handwritten_math_expression/index/results'
+segimg_savepath = 'handwritten_math_expression/index/uploads'
 
 predictImageSegementation(image_inputpath,segimg_savepath)
 (labels,positions) = write_labels_for_all_segs(segimg_savepath)

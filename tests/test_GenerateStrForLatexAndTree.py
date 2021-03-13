@@ -84,8 +84,7 @@ class TestGenerateStrForLatexAndTree(unittest.TestCase):
         mock_verifyRecRelationship.return_value = ("up")
         str = gs.convertLabelIntoExpressionStr(label,position)
         self.assertTrue(mock_verifyRecRelationship.called)
-        self.assertEqual(str, "1/2")
-        self.assertEqual(mock_verifyRecRelationship.call_count,2)
+        self.assertEqual(str, "(1)/(2)")
 
     @patch('handwritten_math_expression.generateStrForLatexAndTree.verifyRecRelationship')
     def testConvertLabelIntoExpressionStr_m3(self, mock_verifyRecRelationship):

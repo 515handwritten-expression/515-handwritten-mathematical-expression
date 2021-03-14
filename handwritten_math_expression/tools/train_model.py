@@ -1,3 +1,6 @@
+# Reference: https://pub.towardsai.net/the-architecture-implementation-of-lenet-5-eef03a68d1f7
+# Reference: https://www.pyimagesearch.com/2016/08/01/lenet-convolutional-neural-network-in-python/
+
 import keras
 from keras.callbacks import ModelCheckpoint
 from keras.layers import Conv2D, MaxPooling2D, Flatten, Dense

@@ -41,31 +41,6 @@ To understand how to use the Hand-written Mathematical Expression Recognization 
 </ol>
 
 
-### User cases
-#### User Case 1: Output print-friendly version of the uploaded math expression image.
-Jane is a student studying AP Calculus. She has some handwritten math formulas in her notebook. She wishes to have a clearer version of these formulas for her exam review notes. She is not familiar with the typesetting systems such as Latex, so she wishes to have a tool that can generate a printed version of these formulas that she can take screenshots and paste onto her notes. 
-
-To achieve her goal, Jane takes a clear picture of each math formula separately and uploads the picture to our website. Our website presents her a printed version of the uploaded math expression, produced using Latex. Jane takes screenshots of these expressions and uses them for her notes.
-
-Procedure:
-<ol>
-<li>Take a photo of one expression. </li>
-<li>Upload the photo to the website and hit the submit button.</li>
-<li>A printed version of the expression appears on the website.</li>
-</ol>
-
-#### User Case 2: Produce result of the uploaded math expression
-Jenny has a hand-written math function and she wishes to output the solution of the function. 
-To achieve her goal, Jenny takes a clear picture of the math function and uploads the picture to our website. Our website presents her a printed version of the uploaded math function. If the function is solvable, the website will present the solution to the function. If the function is insolvable or has no meaning(such as dividing by 0), no solution will be present, and a message will be delivered. 
-
-Procedure:
-<ol>
-<li>Take a photo of one expression. </li>
-<li>Upload the photo to the website and hit the submit button.</li>
-<li>A printed version of the expression appears on the website.</li>
-<li>The result of the function or a message indicating that the function cannot be solved will appear on the website.</li>
-</ol>
-
 ### Limitations
 Currently, our system can only recognize the following symbols:
 
@@ -81,7 +56,8 @@ e
 <img src="https://render.githubusercontent.com/render/math?math=\pm">,
 <img src="https://render.githubusercontent.com/render/math?math=\times">,
 <img src="https://render.githubusercontent.com/render/math?math=\x">,
-and integers
+and integers (0-9)
 
-Our system can only perform calculation on numbers. Our system cannot solve functions that contain variables like $`x`$
+Our system can only perform calculation on numbers. Our system cannot solve functions that contain variables like <img src="https://render.githubusercontent.com/render/math?math=\x">.
 
+For power, our system can only identify the first digit after the power sign. For example, if the target image is <img src="https://render.githubusercontent.com/render/math?math=2^{213}">, our system can only identify <img src="https://render.githubusercontent.com/render/math?math=2^2">

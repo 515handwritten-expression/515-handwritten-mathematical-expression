@@ -19,6 +19,6 @@ script:
   "coverage run -m unittest discover tests"
 
 after_success:
-  coverall # submit coverage
+  coverage report # submit coverage
 
 

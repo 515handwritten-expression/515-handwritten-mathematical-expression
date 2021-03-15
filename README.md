@@ -20,7 +20,7 @@ With our system, the pain of computing complex mathematical expressions by hand 
 │   ├── TrainData
 │   │   └── ...
 │   │       └── ...
-│   └── ...
+│   └── testimg
 │       │   └── ...
 │       ├── testimg_3.png
 │       ├── testinkml_1.inkml
@@ -45,10 +45,7 @@ With our system, the pain of computing complex mathematical expressions by hand 
 │   │   │   └── wait.html
 │   │   └── uploads
 │   │       ├── hard_8
-│   │       │   ├── 01.png
-...
-│   │       │   ├── 08.png
-│   │       │   └── hard_8.pkl
+│   │       │   └── ...
 │   │       └── hard_8.png
 │   ├── label_map_v3.npy
 │   ├── main.py

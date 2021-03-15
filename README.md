@@ -63,10 +63,7 @@ With our system, the pain of computing complex mathematical expressions by hand 
 │   ├── label_map_v3.npy
 │   ├── test_1
 │   │   └── imgseg
-│   │       ├── 01.png
-...
-│   │       ├── 05.png
-│   │       └── test_1.pkl
+│   │       └── ...
 │   ├── test_GenerateStrForLatexAndTree.py
 │   ├── test_ImagePreprocessing.py
 │   ├── test_stringCalculation.py

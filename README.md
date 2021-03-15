@@ -109,7 +109,7 @@ To understand how to use the Hand-written Mathematical Expression Recognization 
 ### Limitations
 Currently, our system can only recognize the following symbols:
 
--, (, ), [, ], {, }, +, =, , ., 
+-, (, ), +, =, , ., 
 <img src="https://render.githubusercontent.com/render/math?math=\frac{}{}">,
 e
 <img src="https://render.githubusercontent.com/render/math?math=\geq">,

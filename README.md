@@ -12,140 +12,16 @@ With our system, the pain of computing complex mathematical expressions by hand 
 ├── data
 │   ├── TestData
 │   │   ├── predPNG
-│   │   │   ├── test_1.png
-...
+│   │   │   └── ...
 │   │   ├── testPNG
-│   │   │   ├── easy_1.png
-│   │   │   ├── hard_1.png
-│   │   │   ├── median_1.png
-...
+│   │   │   └── ...
 │   │   └── testPNGSeg
-│   │       ├── easy_1
-│   │       │   ├── 01.png
-│   │       │   └── easy_1.pkl
-...
+│   │       └── ...
 │   ├── TrainData
-│   │   ├── (
-│   │   │   ├── (_100.png
-...
-│   │   ├── )
-│   │   │   ├── )_100.png
-...
-│   │   ├── +
-│   │   │   ├── +_100.png
-...
-│   │   ├── -
-│   │   │   ├── -_100.png
-...
-│   │   ├── 0
-│   │   │   ├── 0_100.png
-...
-│   │   ├── 1
-│   │   │   ├── 1_100.png
-...
-│   │   ├── 2
-│   │   │   ├── 2_100.png
-...
-│   │   ├── 3
-│   │   │   ├── 3_100.png
-...
-│   │   ├── 4
-│   │   │   ├── 4_100.png
-...
-│   │   ├── 5
-│   │   │   ├── 5_100.png
-...
-│   │   ├── 6
-│   │   │   ├── 6_100.png
-...
-│   │   ├── 7
-│   │   │   ├── 7_100.png
-...
-│   │   ├── 8
-│   │   │   ├── 8_100.png
-...
-│   │   ├── 9
-│   │   │   ├── 9_100.png
-...
-│   │   ├── =
-│   │   │   ├── =_100.png
-...
-│   │   ├── [
-│   │   │   ├── [_1.png
-...
-│   │   ├── ]
-│   │   │   ├── ]_1.png
-...
-│   │   ├── div
-│   │   │   ├── div_1.png
-│...
-│   │   ├── e
-│   │   │   ├── e_1.png
-...
-│   │   ├── geq
-│   │   │   ├── geq_1.png
-...
-│   │   ├── gt
-│   │   │   ├── gt_1.png
-...
-│   │   │   └── gt_174.png
-│   │   ├── leq
-│   │   │   ├── leq_1.png
-...
-│   │   │   └── leq_433.png
-│   │   ├── lt
-│   │   │   ├── lt_1.png
-...
-│   │   │   └── lt_249.png
-│   │   ├── neq
-│   │   │   ├── neq_1.png
-...
-│   │   │   └── neq_294.png
-│   │   ├── pi
-│   │   │   ├── pi_1.png
-...
-│   │   │   └── pi_320.png
-│   │   ├── pm
-│   │   │   ├── pm_1.png
-
-│   │   │   └── pm_430.png
-│   │   ├── times
-│   │   │   ├── times_1.png
-
-│   │   │   └── times_342.png
-│   │   ├── x
-│   │   │   ├── x_1.png
-...
-│   │   │   └── x_291.png
-│   │   ├── {
-│   │   │   ├── {_1.png
-...
-│   │   │   └── {_160.png
-│   │   └── }
-│   │       ├── }_1.png
-...
-│   │       └── }_99.png
-│   └── testimg
-│       ├── testimg_1
-│       │   ├── 1.png
-...
-│       │   ├── 4.png
-│       │   ├── testReadAndConvert_1.png
-│       │   └── testimg_1.pkl
-│       ├── testimg_1.png
-│       ├── testimg_2
-│       │   ├── 1.png
-...
-│       │   ├── 12.png
-│       │   ├── testReadAndConvert_2.png
-│       │   └── testimg_2.pkl
-│       ├── testimg_2.png
-│       ├── testimg_3
-│       │   ├── 1.png
-...
-│       │   ├── 6.png
-│       │   ├── testReadAndConvert_3.png
-│       │   └── testimg_3.pkl
+│   │   └── ...
+│   │       └── ...
+│   └── ...
+│       │   └── ...
 │       ├── testimg_3.png
 │       ├── testinkml_1.inkml
 │       ├── testinkml_2.inkml
@@ -156,15 +32,8 @@ With our system, the pain of computing complex mathematical expressions by hand 
 ├── handwritten_math_expression
 │   ├── ImagePreprocessing.py
 │   ├── LeNetModel_v3.h5
-│   ├── __pycache__
-│   │   ├── ImagePreprocessing.cpython-38.pyc
-│   │   ├── generateStrForLatexAndTree.cpython-38.pyc
-│   │   ├── stringCalculation.cpython-38.pyc
-│   │   └── stringMathJaxConverter.cpython-38.pyc
 │   ├── generateStrForLatexAndTree.py
 │   ├── index
-│   │   ├── __pycache__
-│   │   │   └── myscript.cpython-37.pyc
 │   │   ├── index.py
 │   │   ├── myscript.py
 │   │   ├── results

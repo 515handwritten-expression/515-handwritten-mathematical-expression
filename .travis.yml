@@ -9,16 +9,16 @@ before_install:
   - python --version
   - pip install -U pip
   - pip install -U pytest
-  - pip install codecov
+  - pip install coverage
   - pip install --upgrade setuptools
 
 install:
   - pip install -r requirements.txt
 
 script:
-  - pytest
+  "coverage run -m unittest discover tests"
 
 after_success:
-  - codecov # submit coverage
+  coverall # submit coverage
 
 

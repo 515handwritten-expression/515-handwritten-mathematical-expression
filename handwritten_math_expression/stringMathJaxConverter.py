@@ -41,5 +41,3 @@ def stringToMathJax(string):
     result = result.replace("pm" ," \\pm ")
 
     return result
-
-convertMathjax("1+1")

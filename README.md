@@ -78,9 +78,9 @@ With our system, the pain of computing complex mathematical expressions by hand 
 
 ### Tutorial for how to use the hand-written mathematical expression recognization system
 #### Preperation and Installation
-Our system require python3.5-python3.7 pre-installed.
+Our system requires python3.5-python3.7 pre-installed.
 
-To run the system, you will need to begin by cloning axwx on your own computer by using the following command:
+To run the system, you will need to begin by cloning the system on your own computer by using the following command:
 ```
 git clone https://github.com/515handwritten-expression/515-handwritten-mathematical-expression.git
 ```

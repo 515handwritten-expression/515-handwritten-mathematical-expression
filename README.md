@@ -96,7 +96,7 @@ python3 index.py
 ```
 Then, open the browser and go to the local host http://127.0.0.1:5000/, and you should see the webpage as the following
 
-<img src="webpage.png"
+<img src="docs/webpage.png"
      alt="webpage.png"/>
 
 

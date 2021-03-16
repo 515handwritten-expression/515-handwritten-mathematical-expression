@@ -29,12 +29,6 @@ class TestCalculation(unittest.TestCase):
         self.assertEqual(XTC.expressionTree("1/2"),0.5)
         self.assertEqual(XTC.expressionTree("0/2"),0)
 
-    def testIncalculableError(self):
-        self.assertRaises(IncalculableError, XTC.expressionTree, "2/0")
-        self.assertRaises(IncalculableError, XTC.expressionTree, "2neq0")
-        self.assertRaises(IncalculableError, XTC.expressionTree, "1+")
-        self.assertRaises(IncalculableError, XTC.expressionTree, "^1")
-
     def testCalculationPower(self):
         self.assertEqual(XTC.expressionTree("1^2"),1.0)
         self.assertEqual(XTC.expressionTree("2^0"),1.0)
@@ -56,6 +50,13 @@ class TestCalculation(unittest.TestCase):
             result += node.value
         self.assertCountEqual(result, expected)
         self.assertListEqual(result, expected)
+
+    def testIncalculableError(self):
+        self.assertRaises(IncalculableError, XTC.expressionTree, "2/0")
+        self.assertRaises(IncalculableError, XTC.expressionTree, "2neq0")
+        self.assertRaises(IncalculableError, XTC.expressionTree, "1+")
+        self.assertRaises(IncalculableError, XTC.expressionTree, "^1")
+        self.assertRaises(IncalculableError, XTC.expressionTree, "x=1")
 
 if __name__ == '__main__':
     unittest.main()

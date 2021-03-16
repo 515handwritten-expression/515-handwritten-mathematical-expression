@@ -97,9 +97,9 @@ def my_func():
     string_for_latex,string_for_calc = generateStrForLatexAndTree.getStringsForLatexAndTree(labels,positions)
 
     # this function takes a string of expression, output calculation result to txt
-    stringCalculation.writeCalResult(string_for_calc, 'results')
+    stringCalculation.writeCalResult(string_for_calc)
     # this function takes a string of expression, output LaTex expression to txt
-    stringMathJaxConverter.convertMathjax(string_for_latex, 'results')
+    stringMathJaxConverter.convertMathjax(string_for_latex)
 
 
 if __name__ == '__main__':

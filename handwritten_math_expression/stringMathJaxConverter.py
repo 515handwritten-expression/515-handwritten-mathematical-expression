@@ -2,14 +2,11 @@ import string,re,os
 import os.path
 from os import path
 
-def convertMathjax(string, path):
-    print(os.getcwd())
+def convertMathjax(string):
     result = stringToMathJax(string)
-    path = os.path.join(path, "MathJaxResult.txt")
-    path = os.path.realpath(path)
-    if path.exists(path):
-        os.remove(path)
-    f = open(path, "w")
+    if path.exists("results/MathJaxResult.txt"):
+        os.remove("results/MathJaxResult.txt")
+    f = open("results/MathJaxResult.txt", "w")
     f.write(str(result))
     f.close()
 
@@ -44,3 +41,5 @@ def stringToMathJax(string):
     result = result.replace("pm" ," \\pm ")
 
     return result
+
+convertMathjax("1+1")

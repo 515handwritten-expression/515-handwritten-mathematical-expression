@@ -102,17 +102,17 @@ def expressionTree(expression):
     calc_result = round(calc_result, 4)
     return calc_result
 
-class IncalculableError(Exception):
-    def __init__(self):
-        print("Unable to calculate")
+class IncalculableError(Exception):                                 # pragma: no cover
+    def __init__(self):                                             # pragma: no cover
+        print("Unable to calculate")                                # pragma: no cover
 
-def writeCalResult(expression):
-    try:
-        result = expressionTree(expression)
-    except IncalculableError:
-        result = "Unable to calculate"
-    if path.exists("results/calculationResult.txt"):
-        os.remove("results/calculationResult.txt")
-    f = open("results/calculationResult.txt", "w")
-    f.write(str(result))
-    f.close()
+def writeCalResult(expression):                                     # pragma: no cover
+    try:                                                            # pragma: no cover
+        result = expressionTree(expression)                         # pragma: no cover
+    except IncalculableError:                                       # pragma: no cover
+        result = "Unable to calculate"                              # pragma: no cover
+    if path.exists("results/calculationResult.txt"):                # pragma: no cover
+        os.remove("results/calculationResult.txt")                  # pragma: no cover
+    f = open("results/calculationResult.txt", "w")                  # pragma: no cover
+    f.write(str(result))                                            # pragma: no cover
+    f.close()                                                       # pragma: no cover

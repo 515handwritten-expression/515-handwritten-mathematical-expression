@@ -5,6 +5,11 @@ import os.path, math
 
 class TestCalculation(unittest.TestCase):
 
+    def testNode(self):
+        node = XTC.Node("1")
+        self.assertEqual(node.value,"1")
+        self.assertEqual(node.left,None)
+
     def testSpecialConstant(self):
         self.assertEqual(XTC.expressionTree("pi"),3.1416)
         self.assertEqual(XTC.expressionTree("e"),2.7183)

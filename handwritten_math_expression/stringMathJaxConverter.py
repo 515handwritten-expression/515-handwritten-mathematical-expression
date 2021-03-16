@@ -6,6 +6,7 @@ def convertMathjax(string, path):
     print(os.getcwd())
     result = stringToMathJax(string)
     path = os.path.join(path, "MathJaxResult.txt")
+    path = os.path.realpath(path)
     if path.exists(path):
         os.remove(path)
     f = open(path, "w")

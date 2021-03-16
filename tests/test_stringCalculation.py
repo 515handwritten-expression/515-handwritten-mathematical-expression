@@ -49,8 +49,8 @@ class TestCalculation(unittest.TestCase):
 
     def testInfixToPostfixNo2(self):
         result = []
-        expected = ['1', '2', '+', '3', '*']
-        postfix = XTC.infixToPostfix("(1+2)*3")
+        expected = ['1', '2', '+', '3', '*', '1', '/']
+        postfix = XTC.infixToPostfix("(1+2)*3/1")
         for node in postfix:
             result += node.value
         self.assertCountEqual(result, expected)

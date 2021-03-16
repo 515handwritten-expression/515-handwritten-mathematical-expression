@@ -66,10 +66,9 @@ def expressionTree(expression):
             try:
                 rightVal = float(stack.pop())
                 leftVal = float(stack.pop())
-            except ValueError:
-                raise IncalculableError
-                break
+
             except IndexError:
+                print("index error")
                 raise IncalculableError
                 exit()
             if node.value == '+':

@@ -2,13 +2,13 @@ import string,re,os
 import os.path
 from os import path
 
-def convertMathjax(string):
-    result = stringToMathJax(string)
-    if path.exists("results/MathJaxResult.txt"):
-        os.remove("results/MathJaxResult.txt")
-    f = open("results/MathJaxResult.txt", "w")
-    f.write(str(result))
-    f.close()
+def convertMathjax(string):                             # pragma: no cover
+    result = stringToMathJax(string)                    # pragma: no cover
+    if path.exists("results/MathJaxResult.txt"):        # pragma: no cover
+        os.remove("results/MathJaxResult.txt")          # pragma: no cover
+    f = open("results/MathJaxResult.txt", "w")          # pragma: no cover
+    f.write(str(result))                                # pragma: no cover
+    f.close()                                           # pragma: no cover
 
 # return the MathJax expression from the parsed xml tree
 def stringToMathJax(string):

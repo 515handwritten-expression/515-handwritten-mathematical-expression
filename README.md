@@ -101,7 +101,7 @@ Then, open the browser and go to the local host http://127.0.0.1:5000/, and you 
 
 
 #### How to use the systme
-To understand how to use the Hand-written Mathematical Expression Recognization System, please refer to the example video demo.mov in the folder.
+To understand how to use the Hand-written Mathematical Expression Recognization System, please refer to the example video demo.mov in the <b>docs</b> folder.
 <ol>
 <li>The users first hit the <b>Choose file</b> buttom, and upload a <b>.png</b> file for the mathematical expression they want to use the system on. Then hit the <b>upload</b> buttom to upload the image.</li>
 <li>Once the image is uploaded, the website will show <b>calculating</b>, indicating that the website is calculating.</li>

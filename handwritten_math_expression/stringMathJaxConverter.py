@@ -5,10 +5,9 @@ from os import path
 def convertMathjax(string):
     print(os.getcwd())
     result = stringToMathJax(string)
-    path = "./handwritten_math_expression/index/results/MathJaxResult.txt"
-    if path.exists(path):
-        os.remove(path)
-    f = open(path, "w")
+    if path.exists("index/results/MathJaxResult.txt"):
+        os.remove("index/results/MathJaxResult.txt")
+    f = open("index/results/MathJaxResult.txt", "w")
     f.write(str(result))
     f.close()
 

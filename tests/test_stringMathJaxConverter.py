@@ -23,7 +23,7 @@ class TestMathJax(unittest.TestCase):
         MJAX.convertMathjax("")
         mock_stringToMathJax.return_value = ""
         self.assertTrue(mock_stringToMathJax.called)
-        self.assertTrue(path.exists('./tests/results/MathJaxResult.txt'))
+        self.assertTrue(path.exists('results/MathJaxResult.txt'))
 
 if __name__ == '__main__':
     unittest.main()

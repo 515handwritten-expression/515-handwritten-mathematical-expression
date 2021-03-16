@@ -1,1 +1,1 @@
-<MagicMock name='stringToMathJax()' id='140407044790640'>
+<MagicMock name='stringToMathJax()' id='140245182136224'>

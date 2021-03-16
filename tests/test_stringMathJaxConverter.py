@@ -17,15 +17,12 @@ class TestMathJax(unittest.TestCase):
         self.assertEqual(MJAX.stringToMathJax("1lt2"), "1 \\lt 2")
         self.assertEqual(MJAX.stringToMathJax("(apmb)neqc"), "(a \\pm b) \\neq c")
         self.assertEqual(MJAX.stringToMathJax("i^2"), "i^{ 2 }")
-"""
+
     @patch('handwritten_math_expression.stringMathJaxConverter.stringToMathJax')
     def testConvertMathjax(self, mock_stringToMathJax):
-        path = './tests/results'
-        path = os.path.realpath(path)
-        MJAX.convertMathjax("",path)
+        MJAX.convertMathjax("")
         mock_stringToMathJax.return_value = ""
         self.assertTrue(mock_stringToMathJax.called)
-        self.assertTrue(path.exists('results/MathJaxResult.txt'))
-"""
+
 if __name__ == '__main__':
     unittest.main()

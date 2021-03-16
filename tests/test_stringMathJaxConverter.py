@@ -19,7 +19,7 @@ class TestMathJax(unittest.TestCase):
         self.assertEqual(MJAX.stringToMathJax("i^2"), "i^{ 2 }")
 
 """
-Note: not able to pass this test on Travis CI since the working directory is different from where Front end calls this module
+Note: not able to test this module on Travis CI because the working directory is different from where Front end calls this module
     @patch('handwritten_math_expression.stringMathJaxConverter.stringToMathJax')
     def testConvertMathjax(self, mock_stringToMathJax):
         MJAX.convertMathjax("")

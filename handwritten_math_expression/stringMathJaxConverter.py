@@ -2,6 +2,7 @@ import re,os
 import os.path
 from os import path
 
+# Note: not able to test this module on Travis CI because the working directory is different from where Front end calls this module
 def convertMathjax(string):                             # pragma: no cover
     result = stringToMathJax(string)                    # pragma: no cover
     if path.exists("results/MathJaxResult.txt"):        # pragma: no cover

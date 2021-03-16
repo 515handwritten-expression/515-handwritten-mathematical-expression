@@ -102,6 +102,7 @@ class IncalculableError(Exception):                                 # pragma: no
     def __init__(self):                                             # pragma: no cover
         print("Unable to calculate")                                # pragma: no cover
 
+# Note: not able to test this module on Travis CI because the working directory is different from where Front end calls this module
 def writeCalResult(expression):                                     # pragma: no cover
     try:                                                            # pragma: no cover
         result = expressionTree(expression)                         # pragma: no cover

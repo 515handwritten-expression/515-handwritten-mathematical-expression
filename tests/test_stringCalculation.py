@@ -60,6 +60,15 @@ class TestCalculation(unittest.TestCase):
         self.assertCountEqual(result, expected)
         self.assertListEqual(result, expected)
 
+    def testInfixToPostfixNo1(self):
+        result = []
+        expected = []
+        postfix = XTC.infixToPostfix("")
+        for node in postfix:
+            result += node.value
+        self.assertCountEqual(result, expected)
+        self.assertListEqual(result, expected)
+
     def testIncalculableError(self):
         self.assertRaises(IncalculableError, XTC.expressionTree, "2/0")
         self.assertRaises(IncalculableError, XTC.expressionTree, "2neq0")

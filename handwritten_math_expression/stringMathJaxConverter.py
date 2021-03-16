@@ -1,9 +1,10 @@
-import string,re
+import string,re,os
 import os.path
 from os import path
 
 def convertMathjax(string):
     result = stringToMathJax(string)
+    print(os.getcwd())
     if path.exists("./index/results/MathJaxResult.txt"):
         os.remove("./index/results/MathJaxResult.txt")
     f = open("./index/results/MathJaxResult.txt", "w")

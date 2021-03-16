@@ -1,8 +1,11 @@
 import unittest
+from unittest.mock import patch
+from os import path
+
 import handwritten_math_expression.stringMathJaxConverter as MJAX
 import os.path
 
-class TestCalculation(unittest.TestCase):
+class TestMathJax(unittest.TestCase):
 
     def testMathJaxComponent(self):
         self.assertEqual(MJAX.stringToMathJax("1+2-1"), "1 + 2 - 1")
@@ -14,6 +17,13 @@ class TestCalculation(unittest.TestCase):
         self.assertEqual(MJAX.stringToMathJax("1lt2"), "1 \\lt 2")
         self.assertEqual(MJAX.stringToMathJax("(apmb)neqc"), "(a \\pm b) \\neq c")
         self.assertEqual(MJAX.stringToMathJax("i^2"), "i^{ 2 }")
+
+    @patch('handwritten_math_expression.stringMathJaxConverter.stringToMathJax')
+    def testConvertMathjax(self, mock_stringToMathJax):
+        MJAX.convertMathjax("")
+        mock_stringToMathJax.return_value = ""
+        self.assertTrue(mock_stringToMathJax.called)
+        self.assertTrue(path.exists("results/MathJaxResult.txt"))
 
 if __name__ == '__main__':
     unittest.main()

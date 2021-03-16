@@ -15,6 +15,7 @@ class TestCalculation(unittest.TestCase):
         self.assertEqual(XTC.expressionTree("pi"),3.1416)
         self.assertEqual(XTC.expressionTree("e"),2.7183)
         self.assertEqual(XTC.expressionTree("1"), 1)
+        self.assertEqual(XTC.expressionTree(""), 0)
 
     def testCalculationPlus(self):
         self.assertEqual(XTC.expressionTree("1+2"),3.0)
@@ -30,21 +31,21 @@ class TestCalculation(unittest.TestCase):
     def testCalculationTimes(self):
         self.assertEqual(XTC.expressionTree("1*2"),2)
         self.assertEqual(XTC.expressionTree("2*0"),0)
-        self.assertEqual(XTC.expressionTree("0*0"),0)
+        self.assertEqual(XTC.expressionTree("(0*0)"),0)
         self.assertEqual(XTC.expressionTree("1.1*0.2"),0.22)
 
     def testCalculationDiv(self):
-        self.assertEqual(XTC.expressionTree("1/2"),0.5)
+        self.assertEqual(XTC.expressionTree("(1/(1+1))"),0.5)
         self.assertEqual(XTC.expressionTree("0/2"),0)
 
     def testCalculationPower(self):
         self.assertEqual(XTC.expressionTree("1^2"),1.0)
-        self.assertEqual(XTC.expressionTree("2^0"),1.0)
+        self.assertEqual(XTC.expressionTree("2^2^2"),16.0)
 
     def testInfixToPostfixNo1(self):
         result = []
-        expected = ['2', '0', '^']
-        postfix = XTC.infixToPostfix("2^0")
+        expected = ['3', '1', '-', '1', '^']
+        postfix = XTC.infixToPostfix("(3-1)^1")
         for node in postfix:
             result += node.value
         self.assertCountEqual(result, expected)
@@ -52,8 +53,8 @@ class TestCalculation(unittest.TestCase):
 
     def testInfixToPostfixNo2(self):
         result = []
-        expected = ['1', '2', '+', '3', '*', '1', '/']
-        postfix = XTC.infixToPostfix("(1+2)*3/1")
+        expected = ['1', '2', '^', '2', '+', '3', '*', '1', '/']
+        postfix = XTC.infixToPostfix("(1^2+2)*3/1")
         for node in postfix:
             result += node.value
         self.assertCountEqual(result, expected)

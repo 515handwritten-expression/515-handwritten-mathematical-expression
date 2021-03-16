@@ -41,10 +41,8 @@ def infixToPostfix(expression):
         else:
             postfix.append(element)
         index += 1
-
     while stack != []:
         postfix.append(stack.pop())
-
     return [Node(x) for x in postfix]
 
 

@@ -8,6 +8,7 @@ With our system, the pain of computing complex mathematical expressions by hand 
 ### Directory Structure
 ```
 .
+├── LICENSE
 ├── README.md
 ├── data
 │   ├── TestData
@@ -17,18 +18,19 @@ With our system, the pain of computing complex mathematical expressions by hand 
 │   │   │   └── ...
 │   │   └── testPNGSeg
 │   │       └── ...
+│   │           └── ...
 │   ├── TrainData
 │   │   └── ...
 │   │       └── ...
 │   └── testimg
+│       ├── ...
 │       │   └── ...
-│       ├── testimg_3.png
-│       ├── testinkml_1.inkml
-│       ├── testinkml_2.inkml
-│       └── testinkml_3.inkml
-├── demo.mov
+│       └── ...
 ├── docs
-│   └── FunctionalSpec.docx
+│   ├── Design Specification.pdf
+│   ├── FunctionalSpec.docx
+│   ├── demo.mov
+│   └── webpage.png
 ├── handwritten_math_expression
 │   ├── ImagePreprocessing.py
 │   ├── LeNetModel_v3.h5
@@ -45,7 +47,8 @@ With our system, the pain of computing complex mathematical expressions by hand 
 │   │   │   └── wait.html
 │   │   └── uploads
 │   │       ├── hard_8
-│   │       │   └── ...
+│   │       │   ├── 01.png - 08.png
+│   │       │   └── hard_8.pkl
 │   │       └── hard_8.png
 │   ├── label_map_v3.npy
 │   ├── main.py
@@ -57,19 +60,19 @@ With our system, the pain of computing complex mathematical expressions by hand 
 ├── requirements.txt
 ├── setup.py
 ├── testTravisci
-├── tests
-│   ├── LeNetModel_v3.h5
-│   ├── __init__.py
-│   ├── label_map_v3.npy
-│   ├── test_1
-│   │   └── imgseg
-│   │       └── ...
-│   ├── test_GenerateStrForLatexAndTree.py
-│   ├── test_ImagePreprocessing.py
-│   ├── test_stringCalculation.py
-│   ├── test_stringMathJaxConverter.py
-│   └── train_model.ipynb
-└── webpage.png
+└── tests
+    ├── LeNetModel_v3.h5
+    ├── __init__.py
+    ├── label_map_v3.npy
+    ├── test_1
+    │   └── imgseg
+    │       ├── 01.png - 05.png
+    │       └── test_1.pkl
+    ├── test_GenerateStrForLatexAndTree.py
+    ├── test_ImagePreprocessing.py
+    ├── test_stringCalculation.py
+    ├── test_stringMathJaxConverter.py
+    └── train_model.ipynb
 ```
 
 

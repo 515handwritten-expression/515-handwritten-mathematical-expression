@@ -9,10 +9,12 @@ class TestCalculation(unittest.TestCase):
         node = XTC.Node("1")
         self.assertEqual(node.value,"1")
         self.assertEqual(node.left,None)
+        self.assertEqual(node.right, None)
 
-    def testSpecialConstant(self):
+    def testConstant(self):
         self.assertEqual(XTC.expressionTree("pi"),3.1416)
         self.assertEqual(XTC.expressionTree("e"),2.7183)
+        self.assertEqual(XTC.expressionTree("1"), 1)
 
     def testCalculationPlus(self):
         self.assertEqual(XTC.expressionTree("1+2"),3.0)
@@ -22,6 +24,7 @@ class TestCalculation(unittest.TestCase):
     def testCalculationMinus(self):
         self.assertEqual(XTC.expressionTree("1-2"),-1)
         self.assertEqual(XTC.expressionTree("1-(0-2)"),3)
+        self.assertEqual(XTC.expressionTree("1-((0-2))"),3)
         self.assertEqual(XTC.expressionTree("1.1-0.2"),0.9)
 
     def testCalculationTimes(self):

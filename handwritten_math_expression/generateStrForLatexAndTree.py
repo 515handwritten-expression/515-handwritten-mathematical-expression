@@ -1,4 +1,7 @@
-
+'''This file is used as postprocessing module after each characters is recognized by the model
+Input of the module: A list of labels and a list of character positions in the original image
+Output of the moduule: A string for Latex output and a string for operation
+'''
 #Given two rectangl positions and return the relationship
 def verifyRecRelationship(rec_a, rec_b):
     w1_a,h1_a,w2_a,h2_a = rec_a

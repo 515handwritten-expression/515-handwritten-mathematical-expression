@@ -62,6 +62,8 @@ def getVerticalProjectionSegmentationPoints(img):
         if W[j] <= 0 and start == 1:
             W_End.append(j)
             start = 0
+    if len(W_End) == 0:
+        W_End.append(width)
     return W_Start, W_End
 
 def getHorizontalProjectionSegmentationPoints(img):

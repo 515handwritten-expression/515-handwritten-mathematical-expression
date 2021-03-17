@@ -127,7 +127,7 @@ e
 <img src="https://render.githubusercontent.com/render/math?math=\x">,
 and integers (0-9)
 
-Our system can only perform calculation on numbers. Our system cannot solve functions that contain variables like <img src="https://render.githubusercontent.com/render/math?math=\x">.
+Our system can only perform calculation only on integers and special constants <img src="https://render.githubusercontent.com/render/math?math=\pi"> and e. Our system cannot solve functions that contain variables like <img src="https://render.githubusercontent.com/render/math?math=\x">.
 
 For power, our system can only identify the first digit after the power sign. For example, if the target image is <img src="https://render.githubusercontent.com/render/math?math=2^{213}">, our system can only identify <img src="https://render.githubusercontent.com/render/math?math=2^2">
 

@@ -131,4 +131,4 @@ Our system can only perform calculation on numbers. Our system cannot solve func
 
 For power, our system can only identify the first digit after the power sign. For example, if the target image is <img src="https://render.githubusercontent.com/render/math?math=2^{213}">, our system can only identify <img src="https://render.githubusercontent.com/render/math?math=2^2">
 
-Due to the limitation of the system, uploaded image should be a png file and the size should be smaller than 50kb, black expressions on white background. 
+Due to the limitation of the system, uploaded image should be a png file and the size should be smaller than 50kb, black expressions on white background. Symbols in the expression should not connect to each other. There should be white space between symbols. 

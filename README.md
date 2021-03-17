@@ -129,3 +129,5 @@ and integers (0-9)
 Our system can only perform calculation on numbers. Our system cannot solve functions that contain variables like <img src="https://render.githubusercontent.com/render/math?math=\x">.
 
 For power, our system can only identify the first digit after the power sign. For example, if the target image is <img src="https://render.githubusercontent.com/render/math?math=2^{213}">, our system can only identify <img src="https://render.githubusercontent.com/render/math?math=2^2">
+
+Due to the limitation of the system, uploaded image should be a png file and the size should be smaller than 50kb, black expressions on white background. 

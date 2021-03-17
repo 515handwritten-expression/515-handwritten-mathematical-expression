@@ -29,15 +29,21 @@
 
     console.log("hi")
 
+	$.ajax({
+	type: "POST",
+    url: "/trigger-python",
+    error: function(){
+        // will fire when timeout is reached
+	   window.location.href = 'http://127.0.0.1:5000/error';
+    },
+    success: function(){
+        //do something
+       alert('Calculation Finished');
+       	window.location.href = 'http://127.0.0.1:5000/result';
+    },
+    timeout: 3000 // sets timeout to 3 seconds
+});
 
-    $.ajax({
-	  type: "POST",
-	  url: "/trigger-python",
-	  //data: { param: text}
-	}).done(function( o ) {
-	   alert('Calculation Finished');
-	   window.location.href = 'http://127.0.0.1:5000/result';
-	});
 
 
 </script>

@@ -106,7 +106,7 @@ To understand how to use the Hand-written Mathematical Expression Recognization 
 <li>The users first hit the <b>Choose file</b> buttom, and upload a <b>.png</b> file for the mathematical expression they want to use the system on. Then hit the <b>upload</b> buttom to upload the image.</li>
 <li>Once the image is uploaded, the website will show <b>calculating</b>, indicating that the website is calculating.</li>
 <li>Once the calculation is finished, a printed version of the expression will be shown on the webpage. If the expression is calculable (containing only numbers and calculable operations), a calculation result will appear on the website.</li>
-<li>If the calculation takes more than 30 seconds. It is possible that the backend run into a error. We recommand going back to the beginning site and try with another image.
+<li>If the calculation takes more than 30 seconds. It is possible that the backend runs into a error. We recommand going back to the starting site and try with another image.</li>
 </ol>
 
 

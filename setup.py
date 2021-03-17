@@ -12,7 +12,8 @@ opts = dict(name='Handwritten Mathematical Expression Recognition',
             url='https://github.com/515handwritten-expression/515-handwritten-mathematical-expression',
             license='MIT',
             author='Summer Ai, Runting Shao, Ningji Shen, Chang Xu, Zihui Zhang',
-            author_email='',
+            author_email='aixinransummer@gmail.com, sophiashao1998@gmail.com, '
+                         'ningjis@uw.edu, xuchang@uw.edu, zihuiz@uw.edu',
             version='1.0',
             install_requires=required,
             )

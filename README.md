@@ -115,8 +115,8 @@ The accuracy of our model is around 86%.
 
 Currently, our system can only recognize the following symbols:
 
--, (, ), +, =, , ., 
-<img src="https://render.githubusercontent.com/render/math?math=\frac{}{}">,
+-, (, ), +, =, , 
+<img src="https://render.githubusercontent.com/render/math?math=\div">,
 e
 <img src="https://render.githubusercontent.com/render/math?math=\geq">,
 <img src="https://render.githubusercontent.com/render/math?math=\gt">,
@@ -127,6 +127,7 @@ e
 <img src="https://render.githubusercontent.com/render/math?math=\pm">,
 <img src="https://render.githubusercontent.com/render/math?math=\times">,
 <img src="https://render.githubusercontent.com/render/math?math=\x">,
+fractions,
 and integers (0-9)
 
 Our system can only perform calculation only on integers and special constants <img src="https://render.githubusercontent.com/render/math?math=\pi"> and e. Our system cannot solve functions that contain variables like <img src="https://render.githubusercontent.com/render/math?math=\x"> and numbers with floating-point.

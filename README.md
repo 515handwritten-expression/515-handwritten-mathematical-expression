@@ -111,6 +111,8 @@ To understand how to use the Hand-written Mathematical Expression Recognization 
 
 
 ### Limitations
+The accuracy of our model is around 86%.
+
 Currently, our system can only recognize the following symbols:
 
 -, (, ), +, =, , ., 

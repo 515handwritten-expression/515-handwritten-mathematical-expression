@@ -27,7 +27,7 @@ def convertLabelIntoExpressionStr(labels,position):
     for x in range(len(labels)-1):
         if(verifyRecRelationship(position[x],position[x+1]) == 'power'):
             hat += 1
-            labels.insert(x+1,'^')
+            labels.insert(x+hat,'^')
     if(id != 0):
         labels.insert(0,'(')
         labels.insert(id+1+hat,')')

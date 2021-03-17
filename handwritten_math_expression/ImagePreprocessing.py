@@ -143,7 +143,7 @@ def imgStandardize(imgs,Position):
                 new_h = 1
             else:
                 new_h = (int)(h * STANDARD_SIZE / w)
-            img_resize = cv2.resize(char_img, (STANDARD_SIZE, new_h, interpolation=cv2.INTER_AREA)
+            img_resize = cv2.resize(char_img, (STANDARD_SIZE, new_h), interpolation=cv2.INTER_AREA)
             difference = int((STANDARD_SIZE - img_resize.shape[0]) / 2)
             img_resize = cv2.bitwise_not(img_resize)
             standard_background[difference:img_resize.shape[0] + difference, 0:STANDARD_SIZE] = img_resize

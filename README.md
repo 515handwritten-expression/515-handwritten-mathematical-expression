@@ -115,7 +115,7 @@ The accuracy of our model is around 86%.
 
 Currently, our system can only recognize the following symbols:
 
--, (, ), +, =, , 
+-, (, ), +, =,
 <img src="https://render.githubusercontent.com/render/math?math=\div">,
 e
 <img src="https://render.githubusercontent.com/render/math?math=\geq">,

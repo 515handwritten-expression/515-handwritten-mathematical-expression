@@ -10,13 +10,15 @@ import sys
 sys.path.append("..")
 import main as ms
 
-
-
+ 
 # ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 app = Flask(__name__)
 
 @app.route('/', methods=['GET'])
 def index():
+    input_path =  cwd + '/uploads/'
+    shutil.rmtree(input_path)
+    os.mkdir(input_path)
     return render_template('index.html')
 
 
@@ -34,10 +36,7 @@ def upload_file():
    if request.method == 'POST':
       f = request.files['file']
       f.save(os.path.join(app.config['UPLOAD_FOLDER'],secure_filename(f.filename)))
-      # return 'file uploaded successfully, we will redirect you to the page once your result ready'
-      
-      # call another script
-      # myscript.my_func()
+
       return render_template('wait.html')
 
 RESULT_FOLDER = '/Users/stlp/Desktop/index/results/' # os.path.join('static', 'people_photo')
@@ -46,8 +45,6 @@ app.config['RESULT_FOLDER'] = RESULT_FOLDER
 
 @app.route('/result', methods=['GET', 'POST'])
 def show_result():
-    # full_filename =  os.path.join(app.config['RESULT_FOLDER'], 'res.jpg')  # os.path.join(app.config['RESULT_FOLDER'], 'res.jpg')
-    # print(full_filename)
 
     h = open('results/calculationResult.txt', 'r') 
   
@@ -81,23 +78,18 @@ def show_result():
 
 @app.route('/reset')
 def remove():
-    output_path =  cwd + '/results/' # '/Users/stlp/Desktop/index/results/'
+    output_path =  cwd + '/results/' 
     prefix = os.path.abspath(output_path) 
     file_list = [os.path.join(prefix, f) for f in os.listdir(prefix) if f.endswith('.txt')]
     
-    input_path =  cwd + '/uploads/' # '/Users/stlp/Desktop/index/uploads/'
-    # pr = os.path.abspath(input_path) 
-    # in_list = [os.path.join(pr, f) for f in os.listdir(pr) if (f.endswith('.png'))  or (f.endswith('.jpg')) or (f.endswith('.jpeg'))]
+    input_path =  cwd + '/uploads/' 
+  
 
     try:
  
-        #for file in in_list:
-        #  os.remove(file)
         shutil.rmtree(input_path)
         os.mkdir(input_path) 
 
-        # os.remove(output_filename)
-        # os.remove(output_filename1)
         for file in file_list:
           os.remove(file)
         # return filename
@@ -107,11 +99,14 @@ def remove():
 
 
 @app.route("/trigger-python", methods=['GET', 'POST'])
-def print_something():
+def call_python():
     print("Successful line print")
     ms.my_func()
     return 'OK'
 
+@app.route('/error')
+def render_error():
+   return render_template('error.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

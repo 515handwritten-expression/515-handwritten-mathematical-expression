@@ -1,3 +1,10 @@
+'''This file is used as preprocessing module before each characters is recognized by the model
+Input of the module: An original image from user' s upload
+Output of the module: generate a folder which contain cropped images and a pickle file which 
+contain the poision information of each character
+Note: the commented testImageSegementation and tranImageSegementation are used for test and train 
+dataset' segmentation. To call these functions, see line 275-278(filepath need to be changed accordingly). 
+'''
 import xml.etree.ElementTree as ET
 from cv2 import cv2
 import numpy as np
@@ -236,7 +243,7 @@ def groundTruthParser(ground_truth):
             gt_list.append(i)
     return gt_list
 
-# Segment training data 
+# Segment training data and label the character with according ground truth
 '''def trainImageSegementation(inkmlfilepath):
     files = glob.glob(inkmlfilepath)
     num = 0

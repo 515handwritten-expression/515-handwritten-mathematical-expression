@@ -26,7 +26,6 @@ With our system, the pain of computing complex mathematical expressions by hand 
 ├── docs
 │   ├── Design Specification.pdf
 │   ├── FunctionalSpec.docx
-│   ├── demo.mov
 │   └── webpage.png
 ├── handwritten_math_expression
 │   ├── ImagePreprocessing.py

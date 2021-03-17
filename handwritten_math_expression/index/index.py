@@ -99,11 +99,14 @@ def remove():
 
 
 @app.route("/trigger-python", methods=['GET', 'POST'])
-def print_something():
+def call_python():
     print("Successful line print")
     ms.my_func()
     return 'OK'
 
+@app.route('/error')
+def render_error():
+   return render_template('error.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

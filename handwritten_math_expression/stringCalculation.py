@@ -11,6 +11,8 @@ class Node():
         self.left = None
         self.right = None
 
+# change the infix string to postfix string, read as left child, right child, root
+# e.g. 1+2 -> 12+
 def infixToPostfix(expression):
     stack = []
     postfix = []
@@ -45,7 +47,8 @@ def infixToPostfix(expression):
         postfix.append(stack.pop())
     return [Node(x) for x in postfix]
 
-
+# perform calculation using expression tree
+# input: a string of expression, output: a float of the calculation result
 def expressionTree(expression):
     expression = expression.replace("pi","3.1416")
     expression = expression.replace("e","2.7183")

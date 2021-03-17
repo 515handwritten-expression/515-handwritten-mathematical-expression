@@ -66,7 +66,7 @@ def predict_single_label(input_img_path,model,label_map):
     return predictions
 
 #input a folder with all segments.npg and a position.pkl
-#output a list of labels and a list of positions
+#output a list of predicted labels and a list of positions
 def write_labels_for_all_segs(filepath):
   model = load_model('../LeNetModel_v3.h5')
   label_map = '../label_map_v3.npy'
@@ -92,10 +92,12 @@ def my_func():
     segimg_savepath = 'uploads'
 
     predictImageSegementation(image_inputpath,segimg_savepath)
+    # a list of predicted labels and a list of positions
     (labels,positions) = write_labels_for_all_segs(segimg_savepath)
-    # print(labels,positions)
+    # convert 2 lists into a string by comparing the position of each pair of chars
+    # string_for_calc had zeros inserted before all negative numbers. e.g. (0-2) for -2
     string_for_latex,string_for_calc = generateStrForLatexAndTree.getStringsForLatexAndTree(labels,positions)
-
+    
     # this function takes a string of expression, output calculation result to txt
     stringCalculation.writeCalResult(string_for_calc)
     # this function takes a string of expression, output LaTex expression to txt

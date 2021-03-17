@@ -11,8 +11,9 @@ def convertMathjax(string):                             # pragma: no cover
     f.write(str(result))                                # pragma: no cover
     f.close()                                           # pragma: no cover
 
-# return the MathJax expression from the parsed xml tree
+# return the Latex string of the expression
 def stringToMathJax(string):
+    # first deal with power since need to insert brackets for power. e.g. 2^2 -> 2^{2}
     result = ""
     str_seg = re.findall(r"([a-z]+|\d|[-+()/*^])", string)
     numhat = re.findall(r"\^", string)
@@ -27,7 +28,8 @@ def stringToMathJax(string):
         result += ele
     else:
       result = string
-
+    
+    # then just replace all other operators and special chars with the LaTex syntax
     #string.replace(old, new)
     result = result.replace("+"," + ")
     result = result.replace("-"," - ")

@@ -16,33 +16,12 @@
 <p><strong></strong>Please upload the image you would like to calculate below (.png format)</p>
 
 
-<!--script>
-    $(document).ready(function(){
-        $("#myInput").change(function(){
-            alert("A file has been selected.");
-        });
-    });
-    if ($("#myInput").get(0).files.length === 0) {
-    console.log("No files selected.");
-  }
-
- function unlock(){
-    document.getElementById('myInput').removeAttribute("disabled");
-}
-
-
-</script-->
-
 <script>
 function unlock(){
     document.getElementById('buttonSubmit').removeAttribute("disabled");
 }
 </script>
 
-<!--form action = "http://127.0.0.1:5000/uploader" method = "POST" 
- enctype = "multipart/form-data">
-  <input type='file' id="myInput" name = 'file' onchange="readURL(this);"/>
- <input type = "submit"/-->
 
 <form action="http://127.0.0.1:5000/uploader" method="post" enctype="multipart/form-data">
 <input type="file" onchange="unlock();" name="file">
@@ -51,12 +30,6 @@ function unlock(){
 
 <br>
 
-<!--p>Here is the converted version of the mathematical expression you submitted:</p>
-<img src="expression.jpg" alt="Converted LaTex">
-
-
-<br>
-<p>The calculated result is:</p><input type="number" id="myNumber" placeholder="Result"-->
 
 <div id="result"></div>
 

@@ -1,3 +1,7 @@
+"""
+This module intakes a string of math expression and convers it to LaTex expression.
+It writes the output strinf into "results/MathJaxResult.txt".
+"""
 import re,os
 import os.path
 from os import path

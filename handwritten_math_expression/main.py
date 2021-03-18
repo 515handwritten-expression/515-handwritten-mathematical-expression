@@ -1,3 +1,6 @@
+"""
+This is the main function that gets called by the front end. It reads a PNG image of math expression from the 'upload' folder, calls the image preprocessing module, load the saved Lenet model to do the prediction, calls the generateStrForLatexAndTree module to do the post-processing and calls the calculation module and MathJaxConverter to create the output files. These two module would write the expression in LaTex syntax to a TXT file, and the calculation result to another TxT file in the 'results' folder.
+"""
 import numpy as np
 import os, string, pickle, shutil
 from os.path import isfile

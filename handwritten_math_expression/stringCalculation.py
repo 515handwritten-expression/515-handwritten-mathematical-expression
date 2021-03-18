@@ -1,4 +1,10 @@
-# Reference: https://github.com/Huzaifa-Imran/binaryTreeCreator/tree/5cb2c0b969d516948e7cf5c008965324a99ed670
+"""
+This module intakes a string of math expression and uses expression tree to preform the calculation.
+It supports floats, pi, e, and basic math operations such as plus, minus, devide, times, and power.
+It writes its calculation result into "results/calculationResult.txt" file.
+
+Reference: https://github.com/Huzaifa-Imran/binaryTreeCreator/tree/5cb2c0b969d516948e7cf5c008965324a99ed670
+"""
 import re
 import math
 import os.path

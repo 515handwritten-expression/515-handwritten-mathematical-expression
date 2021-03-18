@@ -28,7 +28,8 @@ With our system, the pain of computing complex mathematical expressions by hand 
 |   └── ...
 ├── docs
 │   ├── Design Specification.pdf
-│   ├── FunctionalSpec.docx
+│   ├── Functional Specification.pdf
+│   ├── Presentation Slides.pdf
 │   └── webpage.png
 ├── handwritten_math_expression
 │   ├── ImagePreprocessing.py
@@ -36,18 +37,17 @@ With our system, the pain of computing complex mathematical expressions by hand 
 │   ├── generateStrForLatexAndTree.py
 │   ├── index
 │   │   ├── index.py
-│   │   ├── myscript.py
 │   │   ├── results
 │   │   │   ├── MathJaxResult.txt
 │   │   │   └── calculationResult.txt
 │   │   ├── templates
+│   │   │   ├── error.html
 │   │   │   ├── index.html
 │   │   │   ├── result.html
 │   │   │   └── wait.html
 │   │   └── uploads
 │   │       ├── hard_8
-│   │       │   ├── 01.png - 08.png
-│   │       │   └── hard_8.pkl
+│   │       │   └── ...
 │   │       └── hard_8.png
 │   ├── label_map_v3.npy
 │   ├── main.py
@@ -58,15 +58,11 @@ With our system, the pain of computing complex mathematical expressions by hand 
 │       └── train_model.py
 ├── requirements.txt
 ├── setup.py
-├── testTravisci
 └── tests
-    ├── LeNetModel_v3.h5
     ├── __init__.py
-    ├── label_map_v3.npy
     ├── test_1
     │   └── imgseg
-    │       ├── 01.png - 05.png
-    │       └── test_1.pkl
+    │       └── ...
     ├── test_GenerateStrForLatexAndTree.py
     ├── test_ImagePreprocessing.py
     ├── test_stringCalculation.py
